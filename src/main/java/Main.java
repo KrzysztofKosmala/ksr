@@ -15,7 +15,7 @@ public class Main
 
        // System.out.println( DATA.generatedStopList.toArray().toString());
         //DATA.setAllReuters();
-      System.out.println( DATA.generatedStopList);
+      System.out.println( DATA.getPreparedSinglePlacesArticles().get(2).getBody());
 
 
 

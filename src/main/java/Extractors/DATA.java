@@ -16,37 +16,66 @@ public final class DATA
 
     public static ArrayList<Article> allArticles = reutersToArticles(allReuters);
 
-    public static ArrayList<String> generatedStopList =generateStopList(allArticles,2.8);
+    public static ArrayList<String> generatedStopList =generateStopList(allArticles,2.1);
     private static List<String> singlePlacesNames = Arrays.asList("west-germany","usa","france","uk","canada","japan");
     private static ArrayList<Article> singlePlacesArticles = findSinglePlacesArticles();
 
+    private static HashMap<String, String> generateKeyWords(ArrayList<Article> articles)
+    {
+        HashMap<String, String> keyWords = new HashMap<>();
 
 
 
 
 
+        return keyWords;
+    }
 
-    private static List<REUTERS> deleteUncompliteData(List<REUTERS> reuters)
+    public static ArrayList<Article> getPreparedSinglePlacesArticles()
+    {
+        return prepareArticles(singlePlacesArticles);
+    }
+
+    private static ArrayList<Article> prepareArticles(ArrayList<Article> articles)
+    {
+        ArrayList<Article> helper = removeStopListWordsFromArticles(articles);
+
+        for(Article article : helper)
+        {
+            PorterStemmer stemmer;
+            ArrayList<String> stemmWords = new ArrayList<>();
+            String stemmWord;
+
+            for(String w : article.getBody())
+            {
+                stemmer = new PorterStemmer();
+                stemmer.add(w.toCharArray(), w.length());
+                stemmer.stem();
+                stemmWord = stemmer.toString();
+                if(stemmWord.length() > 1 )
+                {
+                    stemmWords.add(stemmWord);
+                }
+            }
+            article.setBody(stemmWords);
+
+        }
+        return helper;
+    }
+
+    private static List<REUTERS> deleteIncompliteData(List<REUTERS> reuters)
     {
         List<REUTERS> helper = new ArrayList<>();
         for(REUTERS r : reuters)
         {
 
 
-            if(!(r.getBODY() == null) && !(r.getPLACES() == null))
+            if(!(r.getBODY() == null) && !(r.getPLACES() == null || r.getPLACES().equals("x")))
             {
                 helper.add(r);
             }
         }
         return helper;
-    }
-
-    public static ArrayList<Article> prepareArticles(ArrayList<Article> articles)
-    {
-        removeStopListWordsFromArticles(articles);
-
-
-        return articles;
     }
 
     public static ArrayList<Article> reutersToArticles(List<REUTERS> reuters)
@@ -57,11 +86,10 @@ public final class DATA
         for(REUTERS r : reuters)
         {
            Article newArticle = new Article();
-            if(result.size()==29)
-                a=5;
+
            newArticle.setTopics(getWordsFromTxt(r.getTOPICS()));
            newArticle.setPlaces(getWordsFromTxt(r.getPLACES()));
-           newArticle.setBody(getWordsFromTxt(r.getBODY()));
+           newArticle.setBody(getWordsFromTxt(r.getBODY().replaceAll("[\\d|.|,|/|(|)|-]", "").replace("\n", " ").toLowerCase()));
            result.add(newArticle);
 
         }
@@ -70,15 +98,22 @@ public final class DATA
         return result;
     }
 
-//dopisac metode do czegos tam czyli trim
+    public static ArrayList<Article> getAllArticles()
+    {
+        return allArticles;
+    }
 
     private static ArrayList<Article> findSinglePlacesArticles()
     {
         ArrayList<Article> allSinglePlacesArticles = new ArrayList<>();
 
         for(Article article : allArticles)
+        {
             if(isGoodPlace(article))
+            {
                 allSinglePlacesArticles.add(article);
+            }
+        }
 
             return allSinglePlacesArticles;
     }
@@ -100,23 +135,23 @@ public final class DATA
         return result;
     }
 
-
     private static boolean isGoodPlace(Article r)
     {
 
         for(int i = 0; i < singlePlacesNames.size(); i++)
-            if(r.getPlaces().toString().equals(singlePlacesNames.get(i)))
+            if(r.getPlaces().get(0).equals(singlePlacesNames.get(i)))
                 return true;
 
         return false;
     }
+
     public static List<REUTERS> setAllReuters()
-   {
+    {
         List<REUTERS> r = new ArrayList<>();
        {
            try
            {
-               r = deleteUncompliteData(Reader.read().getREUTERS());
+               r = deleteIncompliteData(Reader.read().getREUTERS());
            } catch (JAXBException e)
            {
                e.printStackTrace();
@@ -126,8 +161,6 @@ public final class DATA
 
    }
 
-
-
     public static ArrayList<String> removeWordsContainedInStopList(ArrayList<String> body, ArrayList<String> stopList)
     {
         return body
@@ -135,7 +168,6 @@ public final class DATA
                 .filter(word -> !stopList.contains(word))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
-
 
     public static ArrayList<String> generateStopList(List<Article> articles, Double occurancePercentage){
         Map<String,Integer> stopLista = new HashMap<>();
