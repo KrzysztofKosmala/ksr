@@ -8,7 +8,28 @@ public class Article
     private ArrayList<String> places;
     private ArrayList<String> title;
 
+    //0 - ilosc wystapien slowa kluczowego
+    //1 - liczba slow
+    //2 -
+    private double[] attributes = new double[2];
     public Article() {}
+
+
+
+    public void addAttribute(int index, double value)
+    {
+        //mozna dodac sprawdzenie indexu ew. jeszcze zmienic na boolean i sprawdzac poprawne dodanie gdzies indziej
+         this.attributes[index] = value;
+    }
+
+    public void showAttributes()
+    {
+        for(double d : attributes)
+        {
+            System.out.print(d + " ");
+        }
+        System.out.println(" ");
+    }
 
     public ArrayList<String> getBody()
     {

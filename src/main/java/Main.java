@@ -1,4 +1,7 @@
+import Extractors.Article;
 import Extractors.DATA;
+import Extractors.DATA_API;
+import Manage.Manager;
 import Reading.DOCUMENT;
 import Reading.Reader;
 
@@ -15,8 +18,11 @@ public class Main
 
        // System.out.println( DATA.generatedStopList.toArray().toString());
         //DATA.setAllReuters();
-      System.out.println( DATA.getPreparedSinglePlacesArticles().get(2).getBody());
-
+      Manager m =new Manager();
+      m.extractAttributes();
+      m.showExtractedAttributesInSinglePlacesNameTrainingSet();
+      System.out.println("chuj");
+      DATA_API.getSingleNameTrainingSet().forEach(Article::showAttributes);
 
 
 
