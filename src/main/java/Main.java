@@ -20,8 +20,7 @@ public class Main
         //DATA.setAllReuters();
       Manager m =new Manager();
       m.extractAttributes();
-      m.showExtractedAttributesInSinglePlacesNameTrainingSet();
-      System.out.println("chuj");
+      m.normalizeAttributes();
       DATA_API.getSingleNameTrainingSet().forEach(Article::showAttributes);
 
 

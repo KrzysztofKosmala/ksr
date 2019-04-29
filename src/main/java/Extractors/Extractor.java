@@ -4,8 +4,17 @@ import java.util.*;
 
 public class Extractor
 {
+    //STATIC
+    //potrzebne do normalizacji (jesli wielowatek to trzeba to zabezpieczyc!)
+    private static double MAX_VALUE_OF_ATTRIBUTE = 0;
+    private static double MIN_VALUE_OF_ATTRIBUTE = 0;
+    private final static int MAX_RANGE_OF_NORMALIZED_ATTRIBUTE = 1;
+    private final static int MIN_RANGE_OF_NORMALIZED_ATTRIBUTE = 0;
+
+    //ELSE
     private final List<Article> articlesList;
     private final HashMap<String, ArrayList<String>> keyWordsMap;
+
 
 
     public Extractor(List<Article> articles, HashMap<String, ArrayList<String>> keyWords)
@@ -27,14 +36,26 @@ public class Extractor
     //wystepowanie slow kluczowego ktore musi byc podobne w stopniu minimum 0.8(JaccardSimilarity) do slowa kluczowego zapisanego w keyWordsMap
     private void extractFirstAttribute(Article article)
     {
-        //skompresowac wynik do 0-1 zamiast konwertowac do double (dodac metode ktora wezmie wartosc z int spłaszczy do 0-1 i zwroci odpowiedniego double)
-        article.addAttribute(0,(double)countKeyWordsInArticle(article));
+        double value = (double)countKeyWordsInArticle(article);
+        if(isBiggerThanCurrentMaxValue(value))
+            MAX_VALUE_OF_ATTRIBUTE =value;
+
+        if(isLessThanCurrentMinValue(value))
+            MIN_VALUE_OF_ATTRIBUTE =value;
+
+        article.addAttribute(0, value);
     }
     //ilosc slow w teksie
     private void extractSecondAttribute(Article article)
     {
-        //skompresowac wynik do 0-1
-        article.addAttribute(1,(double)article.getBody().size());
+        double value = (double)article.getBody().size();
+        if(isBiggerThanCurrentMaxValue(value))
+            MAX_VALUE_OF_ATTRIBUTE =value;
+
+        if(isLessThanCurrentMinValue(value))
+            MIN_VALUE_OF_ATTRIBUTE =value;
+
+        article.addAttribute(1, value);
     }
     //czestotliwosc wystepowania slow kluczowych
     private void extractThirdAttribute(Article article)
@@ -87,6 +108,35 @@ public class Extractor
         }
         return occurrenceOfKeyWordsInArticle;
     }
+    private boolean isBiggerThanCurrentMaxValue(double value)
+    {
+        return value > MAX_VALUE_OF_ATTRIBUTE;
+    }
+
+    private boolean isLessThanCurrentMinValue(double value)
+    {
+        return value < MIN_VALUE_OF_ATTRIBUTE;
+    }
+
+    public void normalizeVectors()
+    {
+        for(Article article : articlesList)
+        {
+            double[] helper = article.getAttributes();
+            for(int i = 0; i<helper.length; i++)
+            {
+                article.addAttribute(i,normalizeAttribute(helper[i]));
+            }
+        }
+    }
+
+    private double normalizeAttribute(double value)
+    {
+        return ((value - MIN_VALUE_OF_ATTRIBUTE)
+                / (MAX_VALUE_OF_ATTRIBUTE - MIN_VALUE_OF_ATTRIBUTE))
+                * (MAX_RANGE_OF_NORMALIZED_ATTRIBUTE - MIN_RANGE_OF_NORMALIZED_ATTRIBUTE) + MIN_RANGE_OF_NORMALIZED_ATTRIBUTE;
+    }
+
 
 
     //GETTERS

@@ -31,6 +31,11 @@ public class Article
         System.out.println(" ");
     }
 
+    public double[] getAttributes()
+    {
+        return attributes;
+    }
+
     public ArrayList<String> getBody()
     {
         return body;
