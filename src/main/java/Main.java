@@ -22,6 +22,7 @@ public class Main
       m.extractAttributes();
       m.normalizeAttributes();
       DATA_API.getSingleNameTrainingSet().forEach(Article::showAttributes);
+      System.out.println(DATA_API.getKeyWords());
 
 
 
