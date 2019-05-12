@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class Article
 {
     private ArrayList<String> body;
-    private ArrayList<String> places;
+    private String places;
     private ArrayList<String> title;
     //CECHY
     // moga byc w stringu i gdy sa potrzebne moga byc pardowane na double
@@ -64,12 +64,12 @@ public class Article
         this.body = body;
     }
 
-    public ArrayList<String> getPlaces()
+    public String getPlaces()
     {
         return places;
     }
 
-    public void setPlaces(ArrayList<String> places)
+    public void setPlaces(String places)
     {
         this.places = places;
     }

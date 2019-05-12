@@ -13,13 +13,12 @@ public final class DATA
 
     private List<REUTERS> allReuters;
     private ArrayList<Article> allArticles;
-    private ArrayList<Article> singleNameTrainingSet;
-    private ArrayList<Article> singleNameTestSet;
+    private ArrayList<Article> trainingSet;
+    private ArrayList<Article> testSet;
     private HashMap<String, ArrayList<String>> keyWords;
-    private ArrayList<Article> preparedSinglePlacesArticles;
     private ArrayList<String> generatedStopList;
-    private List<String> singlePlacesNames;
-    private ArrayList<Article> singlePlacesArticles;
+    private List<String> tags;
+    private ArrayList<Article> articlesWithPlacesTagFromTagList;
 
 
 
@@ -28,31 +27,32 @@ public final class DATA
         this.PERCENT_OF_TRAINING_SET = percentOfTrainingSet;
         allReuters = setAllReuters();
         allArticles = reutersToArticles(allReuters);
-        singlePlacesNames = Arrays.asList("west-germany","usa","france","uk","canada","japan");
-        singlePlacesArticles = findSinglePlacesArticles();
-        generatedStopList =generateStopList(singlePlacesArticles,3.1);
-        setSinglePlacesTrainingAndTestSets(singlePlacesArticles);
-        keyWords = generateKeyWords(singleNameTrainingSet, singlePlacesNames);
+        //w XML-u tag PLACES ma wygladac tak samo jak element listy tags inaczej nie bedzie on wczytywany do pamieci
+        tags = Arrays.asList("west-germany","usa","france","uk","canada","japan");
+        articlesWithPlacesTagFromTagList = findArticlesWithPlacesTagFromTagList();
+        generatedStopList =generateStopList(articlesWithPlacesTagFromTagList,3.1);
+        setTrainingAndTestSets(articlesWithPlacesTagFromTagList);
+        keyWords = generateKeyWords(trainingSet, tags);
     }
 
-    private void setSinglePlacesTrainingAndTestSets(ArrayList<Article> articles )
+    private void setTrainingAndTestSets(ArrayList<Article> articles )
     {
 
         int trainingPart = (int) (articles.size() * ( (double) PERCENT_OF_TRAINING_SET / 100)) ;
 
-        ArrayList<Article> singleNameTrainingSetInner = new ArrayList<>();
-        ArrayList<Article> singleNameTestSetInner = new ArrayList<>();
+        ArrayList<Article> innerTrainingSet = new ArrayList<>();
+        ArrayList<Article> innerTestSet = new ArrayList<>();
         int i;
         for(i=0; i<trainingPart; i++)
         {
-            singleNameTrainingSetInner.add(articles.get(i));
+            innerTrainingSet.add(articles.get(i));
         }
         for(int j=i; j<articles.size(); j++)
         {
-            singleNameTestSetInner.add(articles.get(j));
+            innerTestSet.add(articles.get(j));
         }
-        this.singleNameTestSet = prepareArticles(singleNameTestSetInner);
-        this.singleNameTrainingSet = prepareArticles(singleNameTrainingSetInner);
+        this.testSet = prepareArticles(innerTestSet);
+        this.trainingSet = prepareArticles(innerTrainingSet);
 
     }
 
@@ -62,24 +62,24 @@ public final class DATA
         HashMap<String, ArrayList<String>> keyWords = new HashMap<>();
 
         //      slowo , liczba jego wystapien                          dowolny zbior articles
-        HashMap<String, Integer> occurOfWords = countOccurrenceOfWords(articles);
+        HashMap<String, Integer> occurrenceOfWords = countOccurrenceOfWords(articles);
 
         for(String place : placesNames)
         {
-            ArrayList<Article> articlesWithSpecificPlace = articles.stream().filter(article -> article.getPlaces().get(0).equals(place)).collect(Collectors.toCollection(ArrayList::new));//tutaj troche smierdzi z tym 0 na sztywno
-            HashMap<String, Integer> occurOfWordsInSpecificPlace = countOccurrenceOfWords(articlesWithSpecificPlace);
+            ArrayList<Article> articlesWithSpecificPlace = articles.stream().filter(article -> article.getPlaces().equals(place)).collect(Collectors.toCollection(ArrayList::new));
+            HashMap<String, Integer> occurrenceOfWordsInSpecificPlace = countOccurrenceOfWords(articlesWithSpecificPlace);
             HashMap<String, Integer> keys =  new HashMap<>();
-            for (Map.Entry<String, Integer> entry : occurOfWords.entrySet())
+            for (Map.Entry<String, Integer> entry : occurrenceOfWords.entrySet())
             {
                 String key = entry.getKey();//slowo
                 Integer value = entry.getValue();//ilosc wystapien we wszystkich
 
-                if( occurOfWordsInSpecificPlace.containsKey(key) )
+                if( occurrenceOfWordsInSpecificPlace.containsKey(key) )
                 {
                     // ile procent wystepowania slowa ma byc w danym tagu zeby uznac slowo za kluczowe
-                   if( ((occurOfWordsInSpecificPlace.get(key)*100)/value) >= 90 )// 90% gdzies zdefiniowac
+                   if( ((occurrenceOfWordsInSpecificPlace.get(key)*100)/value) >= 90 )// 90% gdzies zdefiniowac
                    {
-                       keys.put(key, occurOfWordsInSpecificPlace.get(key));
+                       keys.put(key, occurrenceOfWordsInSpecificPlace.get(key));
                    }
                 }
             }
@@ -117,10 +117,7 @@ public final class DATA
         return occurOfWords;
     }
 
-    public  ArrayList<Article> getPreparedSinglePlacesArticles()
-    {
-        return prepareArticles(singlePlacesArticles);
-    }
+
 
     ArrayList<Article> prepareArticles(ArrayList<Article> articles)
     {
@@ -172,7 +169,7 @@ public final class DATA
         {
            Article newArticle = new Article();
            newArticle.setTopics(getWordsFromTxt(r.getTOPICS()));
-           newArticle.setPlaces(getWordsFromTxt(r.getPLACES()));
+           newArticle.setPlaces(r.getPLACES());
            newArticle.setBody(getWordsFromTxt(r.getBODY().replaceAll("[\\d|.|,|/|(|)|&|@|+|<|>|$|:|;|'|_|]", " ").replace("\n", " ").replace("-", " ").toLowerCase()));
            result.add(newArticle);
         }
@@ -184,7 +181,7 @@ public final class DATA
         return allArticles;
     }
 
-    private  ArrayList<Article> findSinglePlacesArticles()
+    private  ArrayList<Article> findArticlesWithPlacesTagFromTagList()
     {
         ArrayList<Article> allSinglePlacesArticles = new ArrayList<>();
 
@@ -219,8 +216,8 @@ public final class DATA
     private  boolean isGoodPlace(Article r)
     {
 
-        for (String singlePlacesName : singlePlacesNames)
-            if (r.getPlaces().get(0).equals(singlePlacesName)) return true;
+        for (String place : tags)
+            if (r.getPlaces().equals(place)) return true;
 
         return false;
     }
@@ -275,14 +272,14 @@ public final class DATA
         return allReuters;
     }
 
-    ArrayList<Article> getSingleNameTrainingSet()
+    ArrayList<Article> getTrainingSet()
     {
-        return singleNameTrainingSet;
+        return trainingSet;
     }
 
-    ArrayList<Article> getSingleNameTestSet()
+    ArrayList<Article> getTestSet()
     {
-        return singleNameTestSet;
+        return testSet;
     }
 
     HashMap<String, ArrayList<String>> getKeyWords()
@@ -295,13 +292,13 @@ public final class DATA
         return generatedStopList;
     }
 
-    List<String> getSinglePlacesNames()
+    List<String> getTags()
     {
-        return singlePlacesNames;
+        return tags;
     }
 
-    ArrayList<Article> getSinglePlacesArticles()
+    ArrayList<Article> getArticlesWithPlacesTagFromTagList()
     {
-        return singlePlacesArticles;
+        return articlesWithPlacesTagFromTagList;
     }
 }

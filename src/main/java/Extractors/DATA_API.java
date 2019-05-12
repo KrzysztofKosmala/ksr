@@ -24,14 +24,14 @@ public final class DATA_API
             return DATA.getKeyWords();
     }
 
-    public static ArrayList<Article> getSingleNameTrainingSet()
+    public static ArrayList<Article> getTrainingSet()
     {
-        return DATA.getSingleNameTrainingSet();
+        return DATA.getTrainingSet();
     }
 
-    public static ArrayList<Article> getSingleNameTestSet()
+    public static ArrayList<Article> getTestSet()
     {
-        return DATA.getSingleNameTestSet();
+        return DATA.getTestSet();
     }
 
     public static ArrayList<String> getStopList()
