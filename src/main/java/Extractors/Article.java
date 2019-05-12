@@ -8,10 +8,11 @@ public class Article
     private ArrayList<String> body;
     private ArrayList<String> places;
     private ArrayList<String> title;
-
-    //0 - ilosc wystapien slowa kluczowego
+    //CECHY
+    // moga byc w stringu i gdy sa potrzebne moga byc pardowane na double
+    //0 - ilosc wystapien slow kluczowych
     //1 - liczba slow
-    //2 - pierwsze słowo kluczowe wystepujace w tekscie
+    //2 - pierwsze słowo kluczowe wystepujace w tekscie(String)
     //3 - numer indexu w ktorym znajduje sie pierwsze znalezione slowo kluczowe
     private HelperForArticle[] attributes = new HelperForArticle[4];
 

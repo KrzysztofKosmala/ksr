@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.netbeans.external:org-apache-commons-logging:RELEASE110">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/netbeans/external/org-apache-commons-logging/RELEASE110/org-apache-commons-logging-RELEASE110.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/netbeans/external/org-apache-commons-logging/RELEASE110/org-apache-commons-logging-RELEASE110-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/netbeans/external/org-apache-commons-logging/RELEASE110/org-apache-commons-logging-RELEASE110-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -22,11 +22,11 @@ public class DOCUMENT
         this.reuters = reuters;
     }
     public ArrayList<REUTERS> getREUTERS() {
-        if(reuters.size() != 0)
-            return reuters;
-        reuters = new ArrayList<REUTERS>();
+    if(reuters.size() != 0)
         return reuters;
-    }
+    reuters = new ArrayList<REUTERS>();
+    return reuters;
+}
     public void setREUTERS(ArrayList<REUTERS> reuters) {
         this.reuters = new ArrayList<REUTERS>();
         this.reuters = reuters;

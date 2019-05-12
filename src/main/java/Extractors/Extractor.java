@@ -101,7 +101,7 @@ public class Extractor
             double value = (double)article.getBody().indexOf(article.getAttributes()[2].getString());
 
             setNewMinMaxValueOfAttributeIfIsNeeded(value);
-            article.addAttribute(3, new HelperForArticle(new Double(value)));
+            article.addAttribute(3, new HelperForArticle(value));
         }
     }
 

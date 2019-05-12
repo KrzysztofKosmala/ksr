@@ -36,5 +36,10 @@
             <version>16.0.2</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>org-apache-commons-logging</artifactId>
+            <version>RELEASE110</version>
+        </dependency>
     </dependencies>
 </project>

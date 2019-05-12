@@ -16,12 +16,12 @@ public class HelperForArticle
         this.stringValue = stringValue;
     }
 
-    boolean isDoubleValue()
+    public boolean isDoubleValue()
     {
         return doubleValue!=null;
     }
 
-    boolean isStringValue()
+    public boolean isStringValue()
     {
         return stringValue!=null;
     }
