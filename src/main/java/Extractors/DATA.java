@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public final class DATA
 {
     private final int PERCENT_OF_TRAINING_SET;
-
+    private final int PERCENT_OF_OCCURRENCE_OF_WORD_IN_ONE_TAG_NEEDED_TO_RECOGNIZE_THIS_WORD_AS_KEYWORD;
     private List<REUTERS> allReuters;
     private ArrayList<Article> allArticles;
     private ArrayList<Article> trainingSet;
@@ -25,9 +25,10 @@ public final class DATA
     public DATA(int percentOfTrainingSet)
     {
         this.PERCENT_OF_TRAINING_SET = percentOfTrainingSet;
+        this.PERCENT_OF_OCCURRENCE_OF_WORD_IN_ONE_TAG_NEEDED_TO_RECOGNIZE_THIS_WORD_AS_KEYWORD =90;
         allReuters = setAllReuters();
         allArticles = reutersToArticles(allReuters);
-        //w XML-u tag PLACES ma wygladac tak samo jak element listy tags inaczej nie bedzie on wczytywany do pamieci
+        //w XML-u tag PLACES ma wygladac DOKLADNIE tak samo jak element listy tags inaczej nie bedzie on wczytywany do pamieci
         tags = Arrays.asList("west-germany","usa","france","uk","canada","japan");
         articlesWithPlacesTagFromTagList = findArticlesWithPlacesTagFromTagList();
         generatedStopList =generateStopList(articlesWithPlacesTagFromTagList,3.1);
@@ -77,7 +78,7 @@ public final class DATA
                 if( occurrenceOfWordsInSpecificPlace.containsKey(key) )
                 {
                     // ile procent wystepowania slowa ma byc w danym tagu zeby uznac slowo za kluczowe
-                   if( ((occurrenceOfWordsInSpecificPlace.get(key)*100)/value) >= 90 )// 90% gdzies zdefiniowac
+                   if( (( occurrenceOfWordsInSpecificPlace.get(key)*100)/value) >= PERCENT_OF_OCCURRENCE_OF_WORD_IN_ONE_TAG_NEEDED_TO_RECOGNIZE_THIS_WORD_AS_KEYWORD)
                    {
                        keys.put(key, occurrenceOfWordsInSpecificPlace.get(key));
                    }

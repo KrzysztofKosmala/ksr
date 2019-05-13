@@ -73,6 +73,7 @@ public class Extractor
     private void extractThirdAttribute(Article article)
     {
         boolean helper = true;
+        article.addAttribute(2, new HelperForArticle());
         for(String word : article.getBody())
         {
             if(helper)
@@ -83,7 +84,7 @@ public class Extractor
                 {
                     if(calculateJaccardSimilarity(word, keyWord)>0.8)
                     {
-                        article.addAttribute(2, new HelperForArticle(keyWord));
+                        article.setStringAttribute(2, keyWord);
 
                        helper = false;
                        break;
@@ -95,13 +96,14 @@ public class Extractor
     //numer indexu w ktorym znajduje sie pierwsze znalezione slowo kluczowe
     private void extractFourthAttribute(Article article)
     {
-        //jakies zabezpieczenie
-        if(article.getAttributes()[2] != null)
+        article.addAttribute(3, new HelperForArticle());
+
+        if(article.getAttributes()[2].isStringValue())
         {
             double value = (double)article.getBody().indexOf(article.getAttributes()[2].getString());
 
             setNewMinMaxValueOfAttributeIfIsNeeded(value);
-            article.addAttribute(3, new HelperForArticle(value));
+            article.setDoubleAttribute(3, value);
         }
     }
 

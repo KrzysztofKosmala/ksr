@@ -6,12 +6,13 @@ public class HelperForArticle
     private String stringValue;
 
 
+    HelperForArticle(){};
     HelperForArticle(Double doubleValue)
     {
         this.doubleValue = doubleValue;
     }
 
-    public HelperForArticle(String stringValue)
+    HelperForArticle(String stringValue)
     {
         this.stringValue = stringValue;
     }
