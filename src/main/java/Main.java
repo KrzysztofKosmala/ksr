@@ -16,6 +16,7 @@ public class Main
       Manager m =new Manager();
       m.extractAttributes();
       m.normalizeAttributes();
+      m.runKNN();
       DATA_API.getTrainingSet().forEach(Article::showAttributes);
       System.out.println(DATA_API.getKeyWords());
 

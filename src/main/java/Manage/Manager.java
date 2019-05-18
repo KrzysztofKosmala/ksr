@@ -2,6 +2,8 @@ package Manage;
 
 import Extractors.DATA_API;
 import Extractors.Extractor;
+import KNN.KNN;
+import KNN.Metrics.Euclidean;
 
 public class Manager
 {
@@ -20,5 +22,10 @@ public class Manager
         extractorForSinglePlacesNameTestSet.normalizeVectors();
     }
 
+    public void runKNN()
+    {
+        KNN knn = new KNN(5,100,new Euclidean(),DATA_API.getTestSet(), DATA_API.getTrainingSet());
+        knn.show();
+    }
 
 }
