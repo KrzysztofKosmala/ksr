@@ -1,31 +1,44 @@
 package Extractors;
 
+
+
+import Extractors.Helpers.HelperForArticle;
+import Extractors.Helpers.MinMaxValueForAttribute;
+
 import java.util.*;
 
 public class Extractor
 {
 
     //potrzebne do normalizacji (jesli wielowatek to trzeba to zabezpieczyc!)
-    private double MAX_VALUE_OF_ATTRIBUTE = 0;
-    private double MIN_VALUE_OF_ATTRIBUTE = 0;
+   private ArrayList<MinMaxValueForAttribute> MIN_MAX_VALUES_FOR_EACH_ATTRIBUTE = new ArrayList<>();
     //
     private final static int MAX_RANGE_OF_NORMALIZED_ATTRIBUTE = 1;
     private final static int MIN_RANGE_OF_NORMALIZED_ATTRIBUTE = 0;
+    private final static int AVAILABLE_EXTRACTORS_TO_USE = 4;
 
     //ELSE
     private final List<Article> articlesList;
+    private final List<Integer> listOfIndexOfExtractorsToRun;
     private final HashMap<String, ArrayList<String>> keyWordsMap;
 
 
 
-    public Extractor(List<Article> articles, HashMap<String, ArrayList<String>> keyWords)
+    public Extractor(List<Article> articles, HashMap<String, ArrayList<String>> keyWords, List<Integer> listOfIndexOfExtractorsToRun)
     {
         this.articlesList = articles;
+        this.listOfIndexOfExtractorsToRun = listOfIndexOfExtractorsToRun;
         this.keyWordsMap = keyWords;
+
+        for(int i =0; i<AVAILABLE_EXTRACTORS_TO_USE; i++)
+        {
+            MIN_MAX_VALUES_FOR_EACH_ATTRIBUTE.add(new MinMaxValueForAttribute(0,0));
+        }
     }
 
     //OPCJE
     //tutaj multithreading powinien byc
+    //do przerobienia zeby dzialalo tlko dla extractorow z indexami z listy
     public void run()
     {
         articlesList.forEach(article ->
@@ -45,7 +58,7 @@ public class Extractor
             {
                 if(helper[i]!=null)
                     if(helper[i].isDoubleValue())
-                        article.setDoubleAttribute(i,normalizeAttribute(helper[i]));
+                        article.setDoubleAttribute(i,normalizeAttribute(helper[i],i));
             }
         }
     }
@@ -56,7 +69,7 @@ public class Extractor
     {
         double value = (double)countKeyWordsInArticle(article);
 
-        setNewMinMaxValueOfAttributeIfIsNeeded(value);
+        setNewMinMaxValueOfAttributeIfIsNeeded(value,0);
         //jakies zabezpieczenie
         article.addAttribute(0, new HelperForArticle(value));
     }
@@ -65,7 +78,7 @@ public class Extractor
     {
         double value = (double)article.getBody().size();
 
-        setNewMinMaxValueOfAttributeIfIsNeeded(value);
+        setNewMinMaxValueOfAttributeIfIsNeeded(value,1);
         //jakies zabezpieczenie
         article.addAttribute(1, new HelperForArticle(value));
     }
@@ -102,7 +115,7 @@ public class Extractor
         {
             double value = (double)article.getBody().indexOf(article.getAttributes()[2].getString());
 
-            setNewMinMaxValueOfAttributeIfIsNeeded(value);
+            setNewMinMaxValueOfAttributeIfIsNeeded(value,3);
             article.setDoubleAttribute(3, value);
         }
     }
@@ -155,27 +168,31 @@ public class Extractor
         }
         return occurrenceOfKeyWordsInArticle;
     }
-    private boolean isBiggerThanCurrentMaxValue(double value)
+    private boolean isBiggerThanCurrentMaxValue(double value, int index)
     {
-        return value > MAX_VALUE_OF_ATTRIBUTE;
+        return value > MIN_MAX_VALUES_FOR_EACH_ATTRIBUTE.get(index).getMax();
     }
-    private boolean isLessThanCurrentMinValue(double value)
+    private boolean isLessThanCurrentMinValue(double value, int index)
     {
-        return value < MIN_VALUE_OF_ATTRIBUTE;
+        return value < MIN_MAX_VALUES_FOR_EACH_ATTRIBUTE.get(index).getMin();
     }
-    private Double normalizeAttribute(HelperForArticle value)
+    private Double normalizeAttribute(HelperForArticle value, int index)
     {
-        return ((value.getDouble() - MIN_VALUE_OF_ATTRIBUTE)
-                / (MAX_VALUE_OF_ATTRIBUTE - MIN_VALUE_OF_ATTRIBUTE))
-                * (MAX_RANGE_OF_NORMALIZED_ATTRIBUTE - MIN_RANGE_OF_NORMALIZED_ATTRIBUTE) + MIN_RANGE_OF_NORMALIZED_ATTRIBUTE;
-    }
-    private void setNewMinMaxValueOfAttributeIfIsNeeded(double value)
-    {
-        if(isBiggerThanCurrentMaxValue(value))
-            MAX_VALUE_OF_ATTRIBUTE =value;
 
-        if(isLessThanCurrentMinValue(value))
-            MIN_VALUE_OF_ATTRIBUTE =value;
+        return ((value.getDouble() - MIN_MAX_VALUES_FOR_EACH_ATTRIBUTE.get(index).getMin())
+                / (MIN_MAX_VALUES_FOR_EACH_ATTRIBUTE.get(index).getMax() - MIN_MAX_VALUES_FOR_EACH_ATTRIBUTE.get(index).getMin()))
+                * (MAX_RANGE_OF_NORMALIZED_ATTRIBUTE - MIN_RANGE_OF_NORMALIZED_ATTRIBUTE) + MIN_RANGE_OF_NORMALIZED_ATTRIBUTE;
+
+    }
+    private void setNewMinMaxValueOfAttributeIfIsNeeded(double value, int index)
+    {
+
+            if(isBiggerThanCurrentMaxValue(value, index))
+                MIN_MAX_VALUES_FOR_EACH_ATTRIBUTE.get(index).setMax(value);
+
+            if(isLessThanCurrentMinValue(value, index))
+                MIN_MAX_VALUES_FOR_EACH_ATTRIBUTE.get(index).setMin(value);
+
     }
 
     //GETTERS

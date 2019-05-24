@@ -1,6 +1,6 @@
 package KNN.Metrics;
 
-import Extractors.HelperForArticle;
+import Extractors.Helpers.HelperForArticle;
 
 public interface Metric
 {

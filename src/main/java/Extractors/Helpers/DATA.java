@@ -1,5 +1,7 @@
-package Extractors;
+package Extractors.Helpers;
 
+import Extractors.Article;
+import Extractors.Helpers.PorterStemmer;
 import Reading.REUTERS;
 import Reading.Reader;
 
@@ -120,7 +122,7 @@ public final class DATA
 
 
 
-    ArrayList<Article> prepareArticles(ArrayList<Article> articles)
+    public ArrayList<Article> prepareArticles(ArrayList<Article> articles)
     {
         ArrayList<Article> helper = removeStopListWordsFromArticles(articles);
 
@@ -177,7 +179,7 @@ public final class DATA
         return result;
     }
 
-    ArrayList<Article> getAllArticles()
+    public ArrayList<Article> getAllArticles()
     {
         return allArticles;
     }
@@ -273,27 +275,27 @@ public final class DATA
         return allReuters;
     }
 
-    ArrayList<Article> getTrainingSet()
+    public ArrayList<Article> getTrainingSet()
     {
         return trainingSet;
     }
 
-    ArrayList<Article> getTestSet()
+    public ArrayList<Article> getTestSet()
     {
         return testSet;
     }
 
-    HashMap<String, ArrayList<String>> getKeyWords()
+    public HashMap<String, ArrayList<String>> getKeyWords()
     {
         return keyWords;
     }
 
-    ArrayList<String> getGeneratedStopList()
+    public ArrayList<String> getGeneratedStopList()
     {
         return generatedStopList;
     }
 
-    List<String> getTags()
+    public List<String> getTags()
     {
         return tags;
     }

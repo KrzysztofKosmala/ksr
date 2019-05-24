@@ -1,6 +1,6 @@
 package KNN.Metrics;
 
-import Extractors.HelperForArticle;
+import Extractors.Helpers.HelperForArticle;
 
 public class Euclidean implements Metric
 {
@@ -12,7 +12,6 @@ public class Euclidean implements Metric
     public double countDistance(HelperForArticle[] attributesLeft, HelperForArticle[] attributesRight)
     {
         double r=0;
-        //mozna tu sprawdzac czy prawa i lewa strona sa takie same ale nie wiadomo po co
         for(int i = 0; i<attributesLeft.length; i++)
         {
                 if(attributesLeft[i].isDoubleValue() && attributesRight[i].isDoubleValue())
@@ -22,7 +21,7 @@ public class Euclidean implements Metric
                     r+= 1;
                 }else if (attributesLeft[i].isStringValue() && attributesRight[i].isStringValue())
                 {
-                    r+= Math.pow(countNGramDistance(attributesLeft[i].getString(), attributesRight[i].getString(), N),2);
+                    r+= Math.pow((1 - countNGramDistance(attributesLeft[i].getString(), attributesRight[i].getString(), N)),2);
                 }
         }
         return Math.sqrt(r);

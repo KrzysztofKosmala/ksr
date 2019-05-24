@@ -4,6 +4,7 @@ import Extractors.Article;
 import KNN.Metrics.Metric;
 
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
@@ -17,26 +18,56 @@ public class KNN
 
     private final List<Article> trainingSet;
     private final List<Article> testSet;
+    private final List<String> tags;
     private List<Article> startSet = new ArrayList<>();
 
-    public KNN(int k, int sizeOfStartSet, Metric metric, List<Article> test, List<Article> training)
+    public KNN(int k, Metric metric, List<Article> test, List<Article> training, List<String> tags)
     {
         this.k = k;
         this.metric = metric;
         this.testSet = test;
         this.trainingSet = training;
-        /*setStartSet(sizeOfStartSet);*/
+        this.tags = tags;
+        setStartSet();
     }
 
-/*    private void setStartSet(int sizeOfStartSet)
+    private void setStartSet()
     {
-        for(int i=0;i <sizeOfStartSet;i++)
+        HashMap<String,Integer> countedTags = new HashMap<>();
+        for(String tag : tags)
         {
-
-            startSet.add(trainingSet.get(ThreadLocalRandom.current().nextInt(0, trainingSet.size() + 1)));
+            int i =0;
+            for(Article article : trainingSet)
+            {
+                if(tag.equals(article.getPlaces()))
+                    i++;
+            }
+            countedTags.put(tag,i);
+            /*startSet.add(trainingSet.get(ThreadLocalRandom.current().nextInt(0, trainingSet.size() + 1)));*/
         }
 
-    }*/
+        int minValue =  Collections.min(countedTags.entrySet(), Comparator.comparingInt(Entry::getValue)).getValue();
+
+        int n,i;
+        Article article;
+        for(String tag : tags)
+        {
+            i=0;
+            while(i<minValue)
+            {
+                n = ThreadLocalRandom.current().nextInt(0, trainingSet.size() + 1);
+                article=trainingSet.get(n);
+
+                if(tag.equals(article.getPlaces()))
+                {
+                    startSet.add(article);
+                    i++;
+                }
+            }
+        }
+
+
+    }
 
     public void show()
     {
@@ -70,7 +101,7 @@ public class KNN
                 .collect(Collectors.groupingBy(w -> w, Collectors.counting()))
                 .entrySet()
                 .stream()
-                .max(Comparator.comparing(Map.Entry::getValue))
+                .max(Comparator.comparing(Entry::getValue))
                 .get()
                 .getKey();
     }

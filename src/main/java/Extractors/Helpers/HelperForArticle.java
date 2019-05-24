@@ -1,4 +1,4 @@
-package Extractors;
+package Extractors.Helpers;
 
 public class HelperForArticle
 {
@@ -6,8 +6,8 @@ public class HelperForArticle
     private String stringValue;
 
 
-    HelperForArticle(){};
-    HelperForArticle(Double doubleValue)
+    public HelperForArticle(){};
+    public HelperForArticle(Double doubleValue)
     {
         this.doubleValue = doubleValue;
     }
@@ -28,12 +28,12 @@ public class HelperForArticle
     }
 
 
-    void setDoubleValue(Double doubleValue)
+    public void setDoubleValue(Double doubleValue)
     {
         this.doubleValue = doubleValue;
     }
 
-    void setStringValue(String stringValue)
+    public void setStringValue(String stringValue)
     {
         this.stringValue = stringValue;
     }

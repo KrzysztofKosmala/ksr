@@ -1,5 +1,7 @@
 package Extractors;
 
+import Extractors.Helpers.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
