@@ -2,7 +2,7 @@ package KNN.Metrics;
 
 import Extractors.Helpers.HelperForArticle;
 
-public class Euclidean implements Metric
+public class Euclidean implements IMetric
 {
     //ilosc takich samych charow w obu porownywanych stringach
     public final static int N = 3;

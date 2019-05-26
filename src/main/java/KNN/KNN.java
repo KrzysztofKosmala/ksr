@@ -1,7 +1,7 @@
 package KNN;
 
 import Extractors.Article;
-import KNN.Metrics.Metric;
+import KNN.Metrics.IMetric;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -14,14 +14,14 @@ public class KNN
     private final int k;
 
     //sposob licznie odleglosci miedzy vectorami cech
-    private final Metric metric;
+    private final IMetric metric;
 
     private final List<Article> trainingSet;
     private final List<Article> testSet;
     private final List<String> tags;
     private List<Article> startSet = new ArrayList<>();
 
-    public KNN(int k, Metric metric, List<Article> test, List<Article> training, List<String> tags)
+    public KNN(int k, IMetric metric, List<Article> test, List<Article> training, List<String> tags)
     {
         this.k = k;
         this.metric = metric;

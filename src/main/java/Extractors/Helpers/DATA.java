@@ -1,7 +1,6 @@
 package Extractors.Helpers;
 
 import Extractors.Article;
-import Extractors.Helpers.PorterStemmer;
 import Reading.REUTERS;
 import Reading.Reader;
 
@@ -13,29 +12,48 @@ public final class DATA
 {
     private final int PERCENT_OF_TRAINING_SET;
     private final int PERCENT_OF_OCCURRENCE_OF_WORD_IN_ONE_TAG_NEEDED_TO_RECOGNIZE_THIS_WORD_AS_KEYWORD;
+    private final String NAME_OF_THE_NODE_WHICH_WILL_BE_CLASSIFIER;
+    private final String PLACES_NODE = "PLACES";
+    private final String TOPICS_NODE = "TOPICS";
     private List<REUTERS> allReuters;
     private ArrayList<Article> allArticles;
     private ArrayList<Article> trainingSet;
     private ArrayList<Article> testSet;
     private HashMap<String, ArrayList<String>> keyWords;
     private ArrayList<String> generatedStopList;
-    private List<String> tags;
-    private ArrayList<Article> articlesWithPlacesTagFromTagList;
+    private List<String> allowedStringsInClassifierNode;
+    private ArrayList<Article> articlesWithAllowedStringsInClassifierNode;
 
 
 
-    public DATA(int percentOfTrainingSet)
+    public DATA(int percentOfTrainingSet, String nameOfTheNodeWhichWillBeClassifier, List<String> allowedStringsInClassifierNode, boolean generateKeyWords, boolean generateStopList)
     {
         this.PERCENT_OF_TRAINING_SET = percentOfTrainingSet;
         this.PERCENT_OF_OCCURRENCE_OF_WORD_IN_ONE_TAG_NEEDED_TO_RECOGNIZE_THIS_WORD_AS_KEYWORD =90;
+        this.NAME_OF_THE_NODE_WHICH_WILL_BE_CLASSIFIER=nameOfTheNodeWhichWillBeClassifier;
         allReuters = setAllReuters();
         allArticles = reutersToArticles(allReuters);
-        //w XML-u tag PLACES ma wygladac DOKLADNIE tak samo jak element listy tags inaczej nie bedzie on wczytywany do pamieci
-        tags = Arrays.asList("west-germany","usa","france","uk","canada","japan");
-        articlesWithPlacesTagFromTagList = findArticlesWithPlacesTagFromTagList();
-        generatedStopList =generateStopList(articlesWithPlacesTagFromTagList,3.1);
-        setTrainingAndTestSets(articlesWithPlacesTagFromTagList);
-        keyWords = generateKeyWords(trainingSet, tags);
+        //w XML-u tag PLACES ma wygladac DOKLADNIE tak samo jak element listy allowedStringsInClassifierNode inaczej nie bedzie on wczytywany do pamieci
+        /*allowedStringsInClassifierNode = Arrays.asList("west-germany","usa","france","uk","canada","japan");*/
+        this.allowedStringsInClassifierNode=allowedStringsInClassifierNode;
+        articlesWithAllowedStringsInClassifierNode = findArticlesWithAllowedStringsInClassifierNode();
+        if(generateStopList)
+        {
+            generatedStopList =generateStopList(articlesWithAllowedStringsInClassifierNode,3.1);
+            //zapis do pliku
+        }else
+        {
+            //wczytanie z pliku
+        }
+        setTrainingAndTestSets(articlesWithAllowedStringsInClassifierNode);
+        if(generateKeyWords)
+        {
+            keyWords = generateKeyWords(trainingSet, this.allowedStringsInClassifierNode);
+            //zapis do pliku
+        }else
+        {
+            //wczytanie z pliku
+        }
     }
 
     private void setTrainingAndTestSets(ArrayList<Article> articles )
@@ -59,7 +77,7 @@ public final class DATA
 
     }
 
-    public  HashMap<String, ArrayList<String>> generateKeyWords(ArrayList<Article> articles, List<String> placesNames)
+    public  HashMap<String, ArrayList<String>> generateKeyWords(ArrayList<Article> articles, List<String> allowedStrings)
     {
         //      miejce, lista slow kluczowych dla tego miejsca
         HashMap<String, ArrayList<String>> keyWords = new HashMap<>();
@@ -67,7 +85,7 @@ public final class DATA
         //      slowo , liczba jego wystapien                          dowolny zbior articles
         HashMap<String, Integer> occurrenceOfWords = countOccurrenceOfWords(articles);
 
-        for(String place : placesNames)
+        for(String place : allowedStrings)
         {
             ArrayList<Article> articlesWithSpecificPlace = articles.stream().filter(article -> article.getPlaces().equals(place)).collect(Collectors.toCollection(ArrayList::new));
             HashMap<String, Integer> occurrenceOfWordsInSpecificPlace = countOccurrenceOfWords(articlesWithSpecificPlace);
@@ -164,18 +182,19 @@ public final class DATA
         return helper;
     }
 
-    private   ArrayList<Article> reutersToArticles(List<REUTERS> reuters)
+    private ArrayList<Article> reutersToArticles(List<REUTERS> reuters)
     {
         ArrayList<Article> result =  new ArrayList<>();
 
         for(REUTERS r : reuters)
         {
            Article newArticle = new Article();
-           newArticle.setTopics(getWordsFromTxt(r.getTOPICS()));
+           newArticle.setTopic(r.getTOPICS());
            newArticle.setPlaces(r.getPLACES());
            newArticle.setBody(getWordsFromTxt(r.getBODY().replaceAll("[\\d|.|,|/|(|)|&|@|+|<|>|$|:|;|'|_|]", " ").replace("\n", " ").replace("-", " ").toLowerCase()));
            result.add(newArticle);
         }
+        reuters.clear();
         return result;
     }
 
@@ -184,19 +203,30 @@ public final class DATA
         return allArticles;
     }
 
-    private  ArrayList<Article> findArticlesWithPlacesTagFromTagList()
+    private  ArrayList<Article> findArticlesWithAllowedStringsInClassifierNode()
     {
-        ArrayList<Article> allSinglePlacesArticles = new ArrayList<>();
+        ArrayList<Article> allowedArticles = new ArrayList<>();
 
-        for(Article article : allArticles)
+        if(NAME_OF_THE_NODE_WHICH_WILL_BE_CLASSIFIER.equals(PLACES_NODE))
         {
-            if(isGoodPlace(article))
+            for (Article article : allArticles)
             {
-                allSinglePlacesArticles.add(article);
+                if (isGoodPlace(article))
+                {
+                    allowedArticles.add(article);
+                }
+            }
+        }else if(NAME_OF_THE_NODE_WHICH_WILL_BE_CLASSIFIER.equals(TOPICS_NODE))
+        {
+            for (Article article : allArticles)
+            {
+                if (isGoodTopic(article))
+                {
+                    allowedArticles.add(article);
+                }
             }
         }
-
-            return allSinglePlacesArticles;
+            return allowedArticles;
     }
 
     private  ArrayList<Article> removeStopListWordsFromArticles(ArrayList<Article> articles)
@@ -219,8 +249,17 @@ public final class DATA
     private  boolean isGoodPlace(Article r)
     {
 
-        for (String place : tags)
+        for (String place : allowedStringsInClassifierNode)
             if (r.getPlaces().equals(place)) return true;
+
+        return false;
+    }
+
+    private  boolean isGoodTopic(Article r)
+    {
+
+        for (String topic : allowedStringsInClassifierNode)
+            if (r.getTopic().equals(topic)) return true;
 
         return false;
     }
@@ -295,13 +334,13 @@ public final class DATA
         return generatedStopList;
     }
 
-    public List<String> getTags()
+    public List<String> getAllowedStringsInClassifierNode()
     {
-        return tags;
+        return allowedStringsInClassifierNode;
     }
 
-    ArrayList<Article> getArticlesWithPlacesTagFromTagList()
+    ArrayList<Article> getArticlesWithAllowedStringsInClassifierNode()
     {
-        return articlesWithPlacesTagFromTagList;
+        return articlesWithAllowedStringsInClassifierNode;
     }
 }

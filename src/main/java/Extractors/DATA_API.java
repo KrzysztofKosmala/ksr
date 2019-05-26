@@ -38,7 +38,7 @@ public final class DATA_API
     }
     public static List<String> getTags()
     {
-        return DATA.getTags();
+        return DATA.getAllowedStringsInClassifierNode();
     }
 
     public static ArrayList<String> getStopList()

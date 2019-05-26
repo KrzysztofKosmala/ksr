@@ -30,7 +30,7 @@ public class Extractor
         this.listOfIndexOfExtractorsToRun = listOfIndexOfExtractorsToRun;
         this.keyWordsMap = keyWords;
 
-        for(int i =0; i<AVAILABLE_EXTRACTORS_TO_USE; i++)
+        for(int i =0; i<listOfIndexOfExtractorsToRun.size(); i++)
         {
             MIN_MAX_VALUES_FOR_EACH_ATTRIBUTE.add(new MinMaxValueForAttribute(0,0));
         }

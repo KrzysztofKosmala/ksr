@@ -9,7 +9,7 @@ public class Article
 {
     private ArrayList<String> body;
     private String places;
-    private ArrayList<String> title;
+    private String topic;
     //CECHY
     // moga byc w stringu i gdy sa potrzebne moga byc pardowane na double
     //0 - ilosc wystapien slow kluczowych
@@ -76,19 +76,13 @@ public class Article
         this.places = places;
     }
 
-    public ArrayList<String> getTitle()
+    public String getTopic()
     {
-        return title;
+        return topic;
     }
 
-    public void setTopics(ArrayList<String> title)
+    public void setTopic(String topic)
     {
-        this.title = title;
-    }
-
-    @Override
-    public String toString()
-    {
-        return "Article{" + "body=" + body + ", places=" + places + ", title=" + title + ", attributes=" + Arrays.toString(attributes) + '}';
+        this.topic = topic;
     }
 }
