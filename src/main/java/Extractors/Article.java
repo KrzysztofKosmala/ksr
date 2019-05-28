@@ -4,6 +4,7 @@ import Extractors.Helpers.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Article
 {
@@ -16,16 +17,16 @@ public class Article
     //1 - liczba slow
     //2 - pierwsze słowo kluczowe wystepujace w tekscie(String)
     //3 - numer indexu w ktorym znajduje sie pierwsze znalezione slowo kluczowe
-    private HelperForArticle[] attributes = new HelperForArticle[4];
+    private ArrayList<HelperForArticle> attributes = new ArrayList<>();
 
     public Article() {}
 
 
 
-    public void addAttribute(int index, HelperForArticle value)
+    public void addAttribute(HelperForArticle value)
     {
         //mozna dodac sprawdzenie indexu ew. jeszcze zmienic na boolean i sprawdzac poprawne dodanie gdzies indziej
-         this.attributes[index] = value;
+         this.attributes.add(value);
     }
 
     public void showAttributes()
@@ -46,12 +47,12 @@ public class Article
         attributes[index].setStringValue(value);
     }
 
-    public void setDoubleAttribute(int index, Double value)
+    public void setDoubleAttribute(Double value)
     {
         attributes[index].setDoubleValue(value);
     }
 
-    public HelperForArticle[] getAttributes()
+    public List<HelperForArticle> getAttributes()
     {
         return attributes;
     }

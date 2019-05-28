@@ -9,7 +9,7 @@ import java.util.List;
 public final class DATA_API
 {
 
-    private static final Extractors.Helpers.DATA DATA = new DATA(60);
+    private static final IExtractors.Helpers.DATA DATA = new DATA(60);
 
 
     public static ArrayList<Article> getAllRareArticles()
