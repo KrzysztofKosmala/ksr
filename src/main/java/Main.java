@@ -1,5 +1,3 @@
-import Extractors.Article;
-import Extractors.DATA_API;
 import Manage.Manager;
 
 public class Main
@@ -17,8 +15,7 @@ public class Main
       m.extractAttributes();
       m.normalizeAttributes();
       m.runKNN();
-      DATA_API.getTrainingSet().forEach(Article::showAttributes);
-      System.out.println(DATA_API.getKeyWords());
+
 
 
 

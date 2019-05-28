@@ -1,6 +1,7 @@
-package Extractors;
+package DAO;
 
-import Extractors.Helpers.DATA;
+import DataLayer.DATA;
+import DataLayer.Article;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +10,7 @@ import java.util.List;
 public final class DATA_API
 {
 
-    private static final IExtractors.Helpers.DATA DATA = new DATA(60);
+    private static final DATA DATA = new DATA(60);
 
 
     public static ArrayList<Article> getAllRareArticles()

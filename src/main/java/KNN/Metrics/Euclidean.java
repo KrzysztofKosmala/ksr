@@ -1,6 +1,6 @@
 package KNN.Metrics;
 
-import Extractors.Helpers.HelperForArticle;
+import DataLayer.Helpers.DoubleOrString;
 
 public class Euclidean implements IMetric
 {
@@ -9,7 +9,7 @@ public class Euclidean implements IMetric
 
 
     //trzeba to sprawdzic
-    public double countDistance(HelperForArticle[] attributesLeft, HelperForArticle[] attributesRight)
+    public double countDistance(DoubleOrString[] attributesLeft, DoubleOrString[] attributesRight)
     {
         double r=0;
         for(int i = 0; i<attributesLeft.length; i++)

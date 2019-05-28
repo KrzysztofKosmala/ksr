@@ -1,6 +1,6 @@
 package KNN;
 
-import Extractors.Article;
+import DataLayer.Article;
 import KNN.Metrics.IMetric;
 
 import java.util.*;

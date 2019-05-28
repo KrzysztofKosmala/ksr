@@ -1,6 +1,6 @@
-package Extractors.Helpers;
+package DataLayer;
 
-import Extractors.Article;
+import DataLayer.Helpers.PorterStemmer;
 import Reading.REUTERS;
 import Reading.Reader;
 

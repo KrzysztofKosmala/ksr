@@ -1,9 +1,8 @@
-package Extractors;
+package DataLayer;
 
-import Extractors.Helpers.*;
+import DataLayer.Helpers.DoubleOrString;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Article
@@ -17,13 +16,13 @@ public class Article
     //1 - liczba slow
     //2 - pierwsze słowo kluczowe wystepujace w tekscie(String)
     //3 - numer indexu w ktorym znajduje sie pierwsze znalezione slowo kluczowe
-    private ArrayList<HelperForArticle> attributes = new ArrayList<>();
+    private ArrayList<DoubleOrString> attributes = new ArrayList<>();
 
     public Article() {}
 
 
 
-    public void addAttribute(HelperForArticle value)
+    public void addAttribute(DoubleOrString value)
     {
         //mozna dodac sprawdzenie indexu ew. jeszcze zmienic na boolean i sprawdzac poprawne dodanie gdzies indziej
          this.attributes.add(value);
@@ -31,28 +30,27 @@ public class Article
 
     public void showAttributes()
     {
-        for(HelperForArticle d : attributes)
+        for(DoubleOrString d : attributes)
         {
-            if(d != null)
-            {
+
                 if (d.isStringValue()) System.out.print(d.getString() + " ");
                 else if (d.isDoubleValue()) System.out.print(d.getDouble() + " ");
-            }
+
         }
         System.out.println(" ");
     }
 
-    public void setStringAttribute(int index, String value)
+
+    public void setAttribute(int index, Double value)
     {
-        attributes[index].setStringValue(value);
+        attributes.get(index).setDoubleValue(value);
     }
 
-    public void setDoubleAttribute(Double value)
+    public void setAttribute(int index, String value)
     {
-        attributes[index].setDoubleValue(value);
+        attributes.get(index).setStringValue(value);
     }
-
-    public List<HelperForArticle> getAttributes()
+    public List<DoubleOrString> getAttributes()
     {
         return attributes;
     }

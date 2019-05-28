@@ -1,8 +1,8 @@
 package KNN.Metrics;
 
-import Extractors.Helpers.HelperForArticle;
+import DataLayer.Helpers.DoubleOrString;
 
 public interface IMetric
 {
-    double countDistance(HelperForArticle[] attributesLeft, HelperForArticle[] attributesRight);
+    double countDistance(DoubleOrString[] attributesLeft, DoubleOrString[] attributesRight);
 }
