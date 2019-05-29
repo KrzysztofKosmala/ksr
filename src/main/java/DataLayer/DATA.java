@@ -20,7 +20,7 @@ public final class DATA
     private ArrayList<Article> trainingSet;
     private ArrayList<Article> testSet;
     private HashMap<String, ArrayList<String>> keyWords;
-    private ArrayList<String> generatedStopList;
+    private ArrayList<String> stopList;
     private List<String> allowedStringsInClassifierNode;
     private ArrayList<Article> articlesWithAllowedStringsInClassifierNode;
 
@@ -30,7 +30,7 @@ public final class DATA
     {
         this.PERCENT_OF_TRAINING_SET = percentOfTrainingSet;
         this.PERCENT_OF_OCCURRENCE_OF_WORD_IN_ONE_TAG_NEEDED_TO_RECOGNIZE_THIS_WORD_AS_KEYWORD =90;
-        this.NAME_OF_THE_NODE_WHICH_WILL_BE_CLASSIFIER=nameOfTheNodeWhichWillBeClassifier;
+        NAME_OF_THE_NODE_WHICH_WILL_BE_CLASSIFIER=nameOfTheNodeWhichWillBeClassifier;
         allReuters = setAllReuters();
         allArticles = reutersToArticles(allReuters);
         //w XML-u tag PLACES ma wygladac DOKLADNIE tak samo jak element listy allowedStringsInClassifierNode inaczej nie bedzie on wczytywany do pamieci
@@ -39,7 +39,7 @@ public final class DATA
         articlesWithAllowedStringsInClassifierNode = findArticlesWithAllowedStringsInClassifierNode();
         if(generateStopList)
         {
-            generatedStopList =generateStopList(articlesWithAllowedStringsInClassifierNode,3.1);
+            stopList =generateStopList(articlesWithAllowedStringsInClassifierNode,3.1);
             //zapis do pliku
         }else
         {
@@ -231,7 +231,7 @@ public final class DATA
 
     private  ArrayList<Article> removeStopListWordsFromArticles(ArrayList<Article> articles)
     {
-        articles.forEach(article -> article.setBody(removeWordsContainedInStopList(article.getBody(), generatedStopList)));
+        articles.forEach(article -> article.setBody(removeWordsContainedInStopList(article.getBody(), stopList)));
 
         return articles;
     }
@@ -329,9 +329,9 @@ public final class DATA
         return keyWords;
     }
 
-    public ArrayList<String> getGeneratedStopList()
+    public ArrayList<String> getStopList()
     {
-        return generatedStopList;
+        return stopList;
     }
 
     public List<String> getAllowedStringsInClassifierNode()
@@ -342,5 +342,10 @@ public final class DATA
     ArrayList<Article> getArticlesWithAllowedStringsInClassifierNode()
     {
         return articlesWithAllowedStringsInClassifierNode;
+    }
+
+    public String getNAME_OF_THE_NODE_WHICH_WILL_BE_CLASSIFIER()
+    {
+        return NAME_OF_THE_NODE_WHICH_WILL_BE_CLASSIFIER;
     }
 }

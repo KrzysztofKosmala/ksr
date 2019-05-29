@@ -10,41 +10,36 @@ import java.util.List;
 public final class DATA_API
 {
 
-    private static final DATA DATA = new DATA(60);
+    private final DATA preparedData;
 
-
-    public static ArrayList<Article> getAllRareArticles()
+    public DATA_API(DATA preparedData)
     {
-       return DATA.getAllArticles();
+        this.preparedData = preparedData;
     }
 
-    public static ArrayList<Article> getAllPreparedArticles()
+    public  HashMap<String, ArrayList<String>> getKeyWords()
     {
-        return DATA.prepareArticles(DATA.getAllArticles());
+            return preparedData.getKeyWords();
     }
 
-    public static HashMap<String, ArrayList<String>> getKeyWords()
+    public  ArrayList<Article> getTrainingSet()
     {
-            return DATA.getKeyWords();
+        return preparedData.getTrainingSet();
     }
 
-    public static ArrayList<Article> getTrainingSet()
+    public  ArrayList<Article> getTestSet()
     {
-        return DATA.getTrainingSet();
+        return preparedData.getTestSet();
     }
 
-    public static ArrayList<Article> getTestSet()
+    public  List<String> getTags()
     {
-        return DATA.getTestSet();
-    }
-    public static List<String> getTags()
-    {
-        return DATA.getAllowedStringsInClassifierNode();
+        return preparedData.getAllowedStringsInClassifierNode();
     }
 
-    public static ArrayList<String> getStopList()
+    public  ArrayList<String> getStopList()
     {
-        return DATA.getGeneratedStopList();
+        return preparedData.getStopList();
     }
 
 }

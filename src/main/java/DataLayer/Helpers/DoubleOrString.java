@@ -1,5 +1,7 @@
 package DataLayer.Helpers;
 
+
+
 public class DoubleOrString
 {
     private Double doubleValue;
@@ -44,4 +46,5 @@ public class DoubleOrString
     {
         this.stringValue = stringValue;
     }
+
 }

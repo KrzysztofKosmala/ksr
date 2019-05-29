@@ -1,11 +1,11 @@
 package KNN;
 
 import DataLayer.Article;
+import KNN.Metrics.Helpers.StringAndDouble;
 import KNN.Metrics.IMetric;
 
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class KNN
@@ -19,19 +19,20 @@ public class KNN
     private final List<Article> trainingSet;
     private final List<Article> testSet;
     private final List<String> tags;
-    private List<Article> startSet = new ArrayList<>();
+    private final String nameOfTheNode;
 
-    public KNN(int k, IMetric metric, List<Article> test, List<Article> training, List<String> tags)
+
+    public KNN(int k, IMetric metric, List<Article> test, List<Article> training, String nameOfTheNode, List<String> tags)
     {
         this.k = k;
         this.metric = metric;
         this.testSet = test;
         this.trainingSet = training;
         this.tags = tags;
-        setStartSet();
+        this.nameOfTheNode = nameOfTheNode;
     }
 
-    private void setStartSet()
+ /*   private void setStartSet()
     {
         HashMap<String,Integer> countedTags = new HashMap<>();
         for(String tag : tags)
@@ -43,7 +44,7 @@ public class KNN
                     i++;
             }
             countedTags.put(tag,i);
-            /*startSet.add(trainingSet.get(ThreadLocalRandom.current().nextInt(0, trainingSet.size() + 1)));*/
+            *//*startSet.add(trainingSet.get(ThreadLocalRandom.current().nextInt(0, trainingSet.size() + 1)));*//*
         }
 
         int minValue =  Collections.min(countedTags.entrySet(), Comparator.comparingInt(Entry::getValue)).getValue();
@@ -67,29 +68,53 @@ public class KNN
         }
 
 
-    }
+    }*/
 
-    public void show()
+    public void run()
     {
-        double percent=0;
-        int i=0;
-        for(Article article : testSet)
+        if(nameOfTheNode.equals("PLACES"))
         {
 
-            if(predictPlace(article).equals(article.getPlaces()))
-                i++;
+            int i=0;
+            for(Article article : trainingSet)
+            {
 
-        }System.out.println("Poprawynych rozpoznan: "+ ((i*100)/testSet.size()) +"%");
-    }
+                if(predict(article).equals(article.getPlaces()))
+                    i++;
 
+            }System.out.println("Poprawynych rozpoznan: "+ ((i*100)/testSet.size()) +"%");
 
-    private String predictPlace(Article articleToPredict)
-    {
-        PriorityQueue<HelperForKNN> neighbours = new PriorityQueue<>();
-        for(Article articleInStartSet : trainingSet)
+        }else if(nameOfTheNode.equals("TOPICS"))
         {
-            neighbours.add(new HelperForKNN(articleInStartSet.getPlaces(),metric.countDistance(articleToPredict.getAttributes(), articleInStartSet.getAttributes())));
+
+            int i=0;
+            for(Article article : trainingSet)
+            {
+
+                if(predict(article).equals(article.getTopic()))
+                    i++;
+
+            }System.out.println("Poprawynych rozpoznan: "+ ((i*100)/testSet.size()) +"%");
+
         }
+    }
+
+    private String predict(Article articleToPredict)
+    {
+        PriorityQueue<StringAndDouble> neighbours = new PriorityQueue<>();
+        if(nameOfTheNode.equals("PLACES"))
+        {
+            for(Article articleInTrainingSet : trainingSet)
+            {
+                neighbours.add(new StringAndDouble(articleInTrainingSet.getPlaces(), metric.countDistance(articleToPredict.getAttributes(), articleInTrainingSet.getAttributes())));
+            }
+        }else if(nameOfTheNode.equals("TOPICS"))
+            {
+                for(Article articleInTrainingSet : trainingSet)
+                {
+                    neighbours.add(new StringAndDouble(articleInTrainingSet.getTopic(), metric.countDistance(articleToPredict.getAttributes(), articleInTrainingSet.getAttributes())));
+                }
+            }
 
         List<String> result = new ArrayList<>();
         for(int i =0; i<k; i++)

@@ -1,30 +1,29 @@
-package KNN;
+package KNN.Metrics.Helpers;
 
 
-
-public class HelperForKNN implements Comparable<HelperForKNN>
+public class StringAndDouble implements Comparable<StringAndDouble>
 {
 
     private final String stringValue;
     private final double doubleValue;
-    HelperForKNN(String stringValue, double doubleValue)
+    public StringAndDouble(String stringValue, double doubleValue)
     {
         this.stringValue = stringValue;
         this.doubleValue = doubleValue;
     }
 
-    String getStringValue()
+    public String getStringValue()
     {
         return stringValue;
     }
 
-    double getDoubleValue()
+    public double getDoubleValue()
     {
         return doubleValue;
     }
 
     @Override
-    public int compareTo(HelperForKNN o)
+    public int compareTo(StringAndDouble o)
     {
         return Double.compare(this.getDoubleValue(), o.getDoubleValue());
     }
