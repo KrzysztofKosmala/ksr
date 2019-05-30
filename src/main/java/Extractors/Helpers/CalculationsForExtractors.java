@@ -4,12 +4,20 @@ import DataLayer.Article;
 import DAO.DATA_API;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
 public class CalculationsForExtractors
 {
-    public static Double calculateJaccardSimilarity(CharSequence left, CharSequence right) {
+    private DATA_API dataApi;
+
+    public CalculationsForExtractors(DATA_API data_api)
+    {
+        this.dataApi = data_api;
+    }
+
+    public  Double calculateJaccardSimilarity(CharSequence left, CharSequence right) {
         Set<String> intersectionSet = new HashSet<>();
         Set<String> unionSet = new HashSet<>();
         boolean unionFilled = false;
@@ -33,13 +41,13 @@ public class CalculationsForExtractors
         }
         return (double) intersectionSet.size() / (double) unionSet.size();
     }
-    public static int countKeyWordsInArticle(Article article)
+    public  int countKeyWordsInArticle(Article article)
     {
         int occurrenceOfKeyWordsInArticle = 0;
 
         for(String word : article.getBody())
         {
-            for(ArrayList<String> allKeyWords : DATA_API.getKeyWords().values())
+            for(ArrayList<String> allKeyWords : dataApi.getKeyWords().values())
             {
                 for (String keyWord : allKeyWords)
                 {
@@ -51,5 +59,10 @@ public class CalculationsForExtractors
             }
         }
         return occurrenceOfKeyWordsInArticle;
+    }
+
+    public HashMap<String, ArrayList<String>> getKeyWords()
+    {
+        return dataApi.getKeyWords();
     }
 }

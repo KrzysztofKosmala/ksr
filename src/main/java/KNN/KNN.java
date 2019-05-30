@@ -76,7 +76,7 @@ public class KNN
         {
 
             int i=0;
-            for(Article article : trainingSet)
+            for(Article article : testSet)
             {
 
                 if(predict(article).equals(article.getPlaces()))
@@ -88,7 +88,7 @@ public class KNN
         {
 
             int i=0;
-            for(Article article : trainingSet)
+            for(Article article : testSet)
             {
 
                 if(predict(article).equals(article.getTopic()))

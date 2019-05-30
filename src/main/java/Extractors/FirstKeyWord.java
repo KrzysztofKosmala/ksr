@@ -13,18 +13,18 @@ public class FirstKeyWord implements IExtractors
 
 
     @Override
-    public void extract(Article article)
+    public void extract(Article article, CalculationsForExtractors calculationsForExtractors)
     {
         boolean helper = true;
         for(String word : article.getBody())
         {
             if(helper)
-                for (ArrayList<String> allKeyWords : DATA_API.getKeyWords().values())
+                for (ArrayList<String> allKeyWords : calculationsForExtractors.getKeyWords().values())
                 {
                     if(helper)
                         for (String keyWord : allKeyWords)
                         {
-                            if(CalculationsForExtractors.calculateJaccardSimilarity(word, keyWord)>0.8)
+                            if(calculationsForExtractors.calculateJaccardSimilarity(word, keyWord)>0.8)
                             {
                                 article.addAttribute(new DoubleOrString(keyWord));
 

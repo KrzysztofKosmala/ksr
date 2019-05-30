@@ -9,37 +9,36 @@ import java.util.List;
 
 public final class DATA_API
 {
-
-    private final DATA preparedData;
-
-    public DATA_API(DATA preparedData)
+    List<Article> trainingSet;
+    List<Article> testSet;
+    ArrayList<String> stopList;
+    HashMap<String, ArrayList<String>> keyWords;
+    public DATA_API(List<Article> trainingSet, List<Article> testSet, ArrayList<String> stopList, HashMap<String, ArrayList<String>> keyWords)
     {
-        this.preparedData = preparedData;
+        this.trainingSet=trainingSet;
+        this.testSet=testSet;
+        this.stopList=stopList;
+        this.keyWords=keyWords;
     }
 
     public  HashMap<String, ArrayList<String>> getKeyWords()
     {
-            return preparedData.getKeyWords();
+            return keyWords;
     }
 
-    public  ArrayList<Article> getTrainingSet()
+    public  List<Article> getTrainingSet()
     {
-        return preparedData.getTrainingSet();
+        return trainingSet;
     }
 
-    public  ArrayList<Article> getTestSet()
+    public  List<Article> getTestSet()
     {
-        return preparedData.getTestSet();
-    }
-
-    public  List<String> getTags()
-    {
-        return preparedData.getAllowedStringsInClassifierNode();
+        return testSet;
     }
 
     public  ArrayList<String> getStopList()
     {
-        return preparedData.getStopList();
+        return stopList;
     }
 
 }

@@ -10,10 +10,10 @@ public class OccurrenceOfKeyWords implements IExtractors
 
 
     @Override
-    public void extract(Article article)
+    public void extract(Article article, CalculationsForExtractors calculationsForExtractors)
     {
 
-            double value = (double) CalculationsForExtractors.countKeyWordsInArticle(article);
+            double value = (double) calculationsForExtractors.countKeyWordsInArticle(article);
 
             article.addAttribute(new DoubleOrString(value));
 

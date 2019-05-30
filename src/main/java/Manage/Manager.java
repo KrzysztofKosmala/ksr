@@ -14,34 +14,35 @@ import java.util.stream.Collectors;
 
 public class Manager
 {
-    private int[] extractors = { 0, 1, 2};
+
     private DATA_API dataApi;
     private KNN knn;
-    private Extractor extractorForTrainingSet;
-    private Extractor extractorForTestSet;
+    private Extractor extractor;
+
     private String nameOfTheNodeWhichWillBeClassifier;
     private List<String> allowedStringsInClassifierNode;
 
 
-    public void setupData(int percentOfTrainingSet, String nameOfTheNode, List<String> allowedStrings, boolean generateKeyWords, boolean generateStopList)
+    public void setupData(int percentOfTrainingSet, String nameOfTheNode, List<String> allowedStrings, boolean generateKeyWords, boolean generateStopList, List<Integer> listOfIndexOfExtractorsToRun)
     {
-        dataApi = new DATA_API(new DATA(percentOfTrainingSet, nameOfTheNode, allowedStrings, generateKeyWords, generateStopList));
+        DATA tempCalculations = new DATA(percentOfTrainingSet, nameOfTheNode, allowedStrings, generateKeyWords, generateStopList);
+        dataApi = new DATA_API(tempCalculations.getTrainingSet(),tempCalculations.getTestSet(),tempCalculations.getStopList(),tempCalculations.getKeyWords());
         nameOfTheNodeWhichWillBeClassifier=nameOfTheNode;
         allowedStringsInClassifierNode=allowedStrings;
-        extractorForTestSet = new Extractor(dataApi.getTestSet(), Arrays.stream(extractors).boxed().collect(Collectors.toList()));
-        extractorForTrainingSet = new Extractor(dataApi.getTrainingSet(), Arrays.stream(extractors).boxed().collect(Collectors.toList()));
+        extractor = new Extractor(listOfIndexOfExtractorsToRun, dataApi);
+
     }
 
     public void extractAttributes()
     {
-        extractorForTestSet.run();
-        extractorForTrainingSet.run();
+        extractor.run();
+
     }
 
     public void normalizeAttributes()
     {
-        extractorForTrainingSet.normalizeVectors();
-        extractorForTestSet.normalizeVectors();
+        extractor.normalizeVectors();
+
     }
 
     public void setupKNN(int k, IMetric metric)

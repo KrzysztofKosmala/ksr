@@ -2,16 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="41707915-2d90-4d94-9859-13576ac54149" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/KNN/Metrics/Helpers/IDistanceBetweenStrings.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/KNN/Metrics/Helpers/NGram.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DAO/DATA_API.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/DATA_API.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataLayer/DATA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataLayer/DATA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataLayer/Helpers/DoubleOrString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataLayer/Helpers/DoubleOrString.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/KNN/HelperForKNN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/KNN/Metrics/Helpers/StringAndDouble.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Extractors/AmountOfWords.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Extractors/AmountOfWords.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Extractors/Extractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Extractors/Extractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Extractors/FirstKeyWord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Extractors/FirstKeyWord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Extractors/Helpers/CalculationsForExtractors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Extractors/Helpers/CalculationsForExtractors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Extractors/Helpers/Normalization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Extractors/Helpers/Normalization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Extractors/IExtractors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Extractors/IExtractors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Extractors/OccurrenceOfKeyWords.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Extractors/OccurrenceOfKeyWords.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/KNN/KNN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/KNN/KNN.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/KNN/Metrics/Euclidean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/KNN/Metrics/Euclidean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/KNN/Metrics/IMetric.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/KNN/Metrics/IMetric.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Manage/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Manage/Manager.java" afterDir="false" />
     </list>
@@ -26,16 +26,12 @@
     <window id="1">
       <content type="file-editors">
         <state>
-          <leaf>
+          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
             <file pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/src/main/java/Manage/Manager.java">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="860">
-                    <caret line="53" column="18" selection-start-line="53" selection-start-column="18" selection-end-line="53" selection-end-column="18" />
-                    <folding>
-                      <element signature="e#1797#1798#0" expanded="true" />
-                      <element signature="e#1822#1823#0" expanded="true" />
-                    </folding>
+                  <state relative-caret-position="460">
+                    <caret line="33" column="5" lean-forward="true" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
                   </state>
                 </provider>
               </entry>
@@ -50,20 +46,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/Extractor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="25" selection-start-line="25" selection-end-line="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/FirstKeyWord.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="26" column="31" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="295">
+              <caret line="31" column="21" lean-forward="true" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -71,8 +55,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="11" column="34" lean-forward="true" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
+            <state relative-caret-position="280">
+              <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -81,10 +65,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/Helpers/CalculationsForExtractors.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/AmountOfWords.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="9" column="24" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="38" />
+            <state relative-caret-position="80">
+              <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/Helpers/Normalization.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="33" selection-start-line="33" selection-end-line="33" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -95,8 +88,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/OccurrenceOfKeyWords.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="15" column="62" selection-start-line="15" selection-start-column="62" selection-end-line="15" selection-end-column="62" />
+            <state relative-caret-position="260">
+              <caret line="13" column="5" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -107,8 +100,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/KNN/Metrics/Euclidean.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="11" column="86" lean-forward="true" selection-start-line="11" selection-start-column="86" selection-end-line="11" selection-end-column="86" />
+            <state relative-caret-position="220">
+              <caret line="11" column="86" selection-start-line="11" selection-start-column="86" selection-end-line="11" selection-end-column="86" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -117,28 +110,26 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/DAO/DATA_API.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/Helpers/CalculationsForExtractors.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="19" column="47" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
+            <state relative-caret-position="35">
+              <caret line="25" column="50" lean-forward="true" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#370#371#0" expanded="true" />
-                <element signature="e#423#424#0" expanded="true" />
+                <element signature="e#279#280#0" expanded="true" />
+                <element signature="e#319#320#0" expanded="true" />
+                <element signature="e#1997#1998#0" expanded="true" />
+                <element signature="e#2019#2020#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/KNN/Metrics/Helpers/NGram.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/Helpers/MinMax.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="23" column="13" lean-forward="true" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-              <folding>
-                <element signature="e#210#211#0" expanded="true" />
-                <element signature="e#227#228#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="40">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -146,22 +137,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/KNN/KNN.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-476">
-              <caret line="71" selection-start-line="71" selection-end-line="71" />
+            <state relative-caret-position="205">
+              <caret line="88" lean-forward="true" selection-start-line="88" selection-end-line="88" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/DataLayer/DATA.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/KNN/Metrics/Helpers/NGram.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="609">
-              <caret line="36" column="43" lean-forward="true" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="110" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#11675#11676#0" expanded="true" />
-                <element signature="e#11739#11740#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="400">
+              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -190,6 +176,7 @@
       <find>PLACES_NODE</find>
       <find>NAME_OF_THE_NODE_WHICH_WILL_BE_CLASSIFIER</find>
       <find>metric</find>
+      <find>get</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -205,20 +192,12 @@
         <option value="$PROJECT_DIR$/src/main/java/Extractors/Helpers/DATA.java" />
         <option value="$PROJECT_DIR$/src/main/java/Extractors/ExtractorsManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/Extractors/Extractors.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Extractors/Helpers/CalculationsForExtractors.java" />
         <option value="$PROJECT_DIR$/src/main/java/Extractors/AmountOfWordsInBody.java" />
         <option value="$PROJECT_DIR$/src/main/java/Extractors/FirstKeyWordInBody.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Extractors/OccurrenceOfKeyWords.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Extractors/IExtractors.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Extractors/AmountOfWords.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Extractors/FirstKeyWord.java" />
         <option value="$PROJECT_DIR$/src/main/java/Extractors/Helpers/HelperForArticle.java" />
         <option value="$PROJECT_DIR$/src/main/java/Extractors/Helpers/DoubleOrString.java" />
         <option value="$PROJECT_DIR$/src/main/java/Extractors/Article.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Extractors/Extractor.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Extractors/Helpers/Normalization.java" />
         <option value="$PROJECT_DIR$/src/main/java/Extractors/Helpers/MinMax.java" />
-        <option value="$PROJECT_DIR$/src/main/java/DAO/DATA_API.java" />
         <option value="$PROJECT_DIR$/src/main/java/KNN/Metrics/Helpers/IDistanceBetweenStrings.java" />
         <option value="$PROJECT_DIR$/src/main/java/KNN/Metrics/Helpers/NGram.java" />
         <option value="$PROJECT_DIR$/src/main/java/KNN/Metrics/IMetric.java" />
@@ -228,8 +207,16 @@
         <option value="$PROJECT_DIR$/src/main/java/KNN/StringAndDouble.java" />
         <option value="$PROJECT_DIR$/src/main/java/KNN/Metrics/Helpers/StringAndDouble.java" />
         <option value="$PROJECT_DIR$/src/main/java/DataLayer/DATA.java" />
-        <option value="$PROJECT_DIR$/src/main/java/KNN/KNN.java" />
+        <option value="$PROJECT_DIR$/src/main/java/DAO/DATA_API.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Extractors/IExtractors.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Extractors/OccurrenceOfKeyWords.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Extractors/FirstKeyWord.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Extractors/Helpers/CalculationsForExtractors.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Extractors/Extractor.java" />
         <option value="$PROJECT_DIR$/src/main/java/Manage/Manager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Extractors/AmountOfWords.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Extractors/Helpers/Normalization.java" />
+        <option value="$PROJECT_DIR$/src/main/java/KNN/KNN.java" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
       </list>
     </option>
@@ -358,7 +345,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559162545618" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559250682903" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -402,7 +389,8 @@
       <workItem from="1557765910928" duration="7485000" />
       <workItem from="1557850745303" duration="6781000" />
       <workItem from="1558195347208" duration="7848000" />
-      <workItem from="1559154301521" duration="8187000" />
+      <workItem from="1559154301521" duration="8743000" />
+      <workItem from="1559245113437" duration="5539000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed problem with finding articles">
       <created>1557693990132</created>
@@ -415,13 +403,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53675000" />
+    <option name="totallyTimeSpent" value="59770000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2514" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13691932" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13814181" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -429,9 +417,9 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.3281412" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.31160572" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997923" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3281412" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.31152648" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.3997923" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -500,6 +488,30 @@
     <MESSAGE value="Fixed problem with finding articles" />
     <option name="LAST_COMMIT_MESSAGE" value="Fixed problem with finding articles" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Extractors/Helpers/Normalization.java</url>
+          <line>31</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/KNN/Metrics/Euclidean.java</url>
+          <line>19</line>
+          <properties />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/KNN/Metrics/Euclidean.java</url>
+          <line>21</line>
+          <properties />
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/KNN/Metrics/Metric.java" />
     <entry file="file://$PROJECT_DIR$/reuters.xml">
@@ -531,72 +543,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DataLayer/Helpers/PorterStemmer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/Helpers/MinMax.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" column="29" lean-forward="true" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
-          <folding>
-            <element signature="e#139#140#0" expanded="true" />
-            <element signature="e#165#166#0" expanded="true" />
-            <element signature="e#207#208#0" expanded="true" />
-            <element signature="e#237#238#0" expanded="true" />
-            <element signature="e#271#272#0" expanded="true" />
-            <element signature="e#297#298#0" expanded="true" />
-            <element signature="e#339#340#0" expanded="true" />
-            <element signature="e#369#370#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/Helpers/Normalization.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-65">
-          <caret line="14" column="49" lean-forward="true" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/IExtractors.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/AmountOfWords.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DataLayer/Article.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="52" column="32" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
-          <folding>
-            <element signature="e#1432#1433#0" expanded="true" />
-            <element signature="e#1465#1466#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DataLayer/Helpers/DoubleOrString.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/KNN/Metrics/Helpers/StringAndDouble.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
@@ -618,17 +564,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/KNN/KNN.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-476">
-          <caret line="71" selection-start-line="71" selection-end-line="71" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/DataLayer/DATA.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="36" column="43" lean-forward="true" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="110" />
+        <state relative-caret-position="-2316">
+          <caret line="111" column="79" selection-start-line="111" selection-start-column="76" selection-end-line="111" selection-end-column="79" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#11675#11676#0" expanded="true" />
@@ -637,69 +576,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/KNN/Metrics/Helpers/NGram.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/DataLayer/Article.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="23" column="13" lean-forward="true" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        <state relative-caret-position="418">
+          <caret line="52" column="32" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
           <folding>
-            <element signature="e#210#211#0" expanded="true" />
-            <element signature="e#227#228#0" expanded="true" />
+            <element signature="e#1432#1433#0" expanded="true" />
+            <element signature="e#1465#1466#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/DataLayer/Helpers/PorterStemmer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
-          <caret line="11" column="34" lean-forward="true" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/DataLayer/Helpers/DoubleOrString.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/IExtractors.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="8" column="92" selection-start-line="8" selection-start-column="92" selection-end-line="8" selection-end-column="92" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/Extractor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/KNN/Metrics/Euclidean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="11" column="86" lean-forward="true" selection-start-line="11" selection-start-column="86" selection-end-line="11" selection-end-column="86" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/OccurrenceOfKeyWords.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" column="62" selection-start-line="15" selection-start-column="62" selection-end-line="15" selection-end-column="62" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Manage/Manager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="860">
-          <caret line="53" column="18" selection-start-line="53" selection-start-column="18" selection-end-line="53" selection-end-column="18" />
-          <folding>
-            <element signature="e#1797#1798#0" expanded="true" />
-            <element signature="e#1822#1823#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/DAO/DATA_API.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="19" column="47" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
+        <state relative-caret-position="460">
+          <caret line="23" column="44" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#370#371#0" expanded="true" />
@@ -708,20 +623,106 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/Helpers/CalculationsForExtractors.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/FirstKeyWord.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="9" column="24" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="38" />
+        <state relative-caret-position="520">
+          <caret line="26" column="103" lean-forward="true" selection-start-line="26" selection-start-column="103" selection-end-line="26" selection-end-column="103" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/FirstKeyWord.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/Extractor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="26" column="31" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
+        <state relative-caret-position="295">
+          <caret line="31" column="21" lean-forward="true" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/KNN/Metrics/Helpers/NGram.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Manage/Manager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="33" column="5" lean-forward="true" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/Helpers/CalculationsForExtractors.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="35">
+          <caret line="25" column="50" lean-forward="true" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#279#280#0" expanded="true" />
+            <element signature="e#319#320#0" expanded="true" />
+            <element signature="e#1997#1998#0" expanded="true" />
+            <element signature="e#2019#2020#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/Helpers/MinMax.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/OccurrenceOfKeyWords.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="13" column="5" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/KNN/KNN.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="88" lean-forward="true" selection-start-line="88" selection-end-line="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/AmountOfWords.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/KNN/Metrics/Euclidean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="11" column="86" selection-start-line="11" selection-start-column="86" selection-end-line="11" selection-end-column="86" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Extractors/Helpers/Normalization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

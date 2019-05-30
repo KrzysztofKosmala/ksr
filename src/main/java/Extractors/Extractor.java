@@ -2,7 +2,9 @@ package Extractors;
 
 
 
+import DAO.DATA_API;
 import DataLayer.Article;
+import Extractors.Helpers.CalculationsForExtractors;
 import Extractors.Helpers.Normalization;
 
 import java.util.*;
@@ -16,21 +18,22 @@ public class Extractor
     //private final static int AVAILABLE_EXTRACTORS_TO_USE = 4;
 
     //ELSE
-    private final List<Article> articlesList;
-    private final List<Integer> listOfIndexOfExtractorsToRun;
 
+    private final List<Integer> listOfIndexOfExtractorsToRun;
+    private CalculationsForExtractors calculationsForExtractors;
     //Extractors repository
     ArrayList<IExtractors> allExtractors = new ArrayList<>();
-
+    DATA_API data_api;
     Normalization normalization = new Normalization();
 
 
 
 
-    public Extractor(List<Article> articles, List<Integer> listOfIndexOfExtractorsToRun)
+    public Extractor(List<Integer> listOfIndexOfExtractorsToRun, DATA_API data_api)
     {
+        calculationsForExtractors= new CalculationsForExtractors(data_api);
         allExtractors.add(new OccurrenceOfKeyWords());
-        this.articlesList = articles;
+        this.data_api = data_api;
         this.listOfIndexOfExtractorsToRun = listOfIndexOfExtractorsToRun;
         allExtractors.addAll(Arrays.asList(new OccurrenceOfKeyWords(), new AmountOfWords(), new FirstKeyWord()));
     }
@@ -39,11 +42,19 @@ public class Extractor
 
     public void run()
     {
-        articlesList.forEach(article ->
+        data_api.getTestSet().forEach(article ->
         {
             for(Integer i : listOfIndexOfExtractorsToRun)
             {
-                allExtractors.get(i).extract(article);
+                allExtractors.get(i).extract(article, calculationsForExtractors);
+            }
+        });
+
+        data_api.getTrainingSet().forEach(article ->
+        {
+            for(Integer i : listOfIndexOfExtractorsToRun)
+            {
+                allExtractors.get(i).extract(article, calculationsForExtractors);
             }
         });
     }
@@ -51,7 +62,8 @@ public class Extractor
 
     public void normalizeVectors()
     {
-        normalization.normalize(articlesList);
+        normalization.normalize(data_api.getTestSet());
+        normalization.normalize(data_api.getTrainingSet());
     }
 
 }
