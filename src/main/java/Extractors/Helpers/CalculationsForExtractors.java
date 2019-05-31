@@ -3,10 +3,7 @@ package Extractors.Helpers;
 import DataLayer.Article;
 import DAO.DATA_API;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class CalculationsForExtractors
 {
@@ -47,21 +44,20 @@ public class CalculationsForExtractors
 
         for(String word : article.getBody())
         {
-            for(ArrayList<String> allKeyWords : dataApi.getKeyWords().values())
+            for(String keyWord : dataApi.getKeyWords())
             {
-                for (String keyWord : allKeyWords)
-                {
+
                     if(calculateJaccardSimilarity(word,keyWord)>=0.8)
                     {
                         occurrenceOfKeyWordsInArticle++;
                     }
-                }
+
             }
         }
         return occurrenceOfKeyWordsInArticle;
     }
 
-    public HashMap<String, ArrayList<String>> getKeyWords()
+    public List<String> getKeyWords()
     {
         return dataApi.getKeyWords();
     }

@@ -2,8 +2,8 @@ package Extractors.Helpers;
 
 public class MinMax
 {
-    private double min = 2.0;
-    private double max = -2.0;
+    private double min = 20000000.0;
+    private double max = -200000000.0;
 
     public double getMin()
     {

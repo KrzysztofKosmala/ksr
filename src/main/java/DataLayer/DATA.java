@@ -5,6 +5,9 @@ import Reading.REUTERS;
 import Reading.Reader;
 
 import javax.xml.bind.JAXBException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -15,14 +18,18 @@ public final class DATA
     private final String NAME_OF_THE_NODE_WHICH_WILL_BE_CLASSIFIER;
     private final String PLACES_NODE = "PLACES";
     private final String TOPICS_NODE = "TOPICS";
+    private final String stopListPath = "StopList.txt";
+    private final String keyWordsPath = "KeyWords.txt";
+
     private List<REUTERS> allReuters;
     private ArrayList<Article> allArticles;
     private ArrayList<Article> trainingSet;
     private ArrayList<Article> testSet;
-    private HashMap<String, ArrayList<String>> keyWords;
-    private ArrayList<String> stopList;
+    private HashMap<String, List<String>> keyWords;
+    private List<String> stopList;
     private List<String> allowedStringsInClassifierNode;
     private ArrayList<Article> articlesWithAllowedStringsInClassifierNode;
+
 
 
 
@@ -34,25 +41,38 @@ public final class DATA
         allReuters = setAllReuters();
         allArticles = reutersToArticles(allReuters);
         //w XML-u tag PLACES ma wygladac DOKLADNIE tak samo jak element listy allowedStringsInClassifierNode inaczej nie bedzie on wczytywany do pamieci
-        /*allowedStringsInClassifierNode = Arrays.asList("west-germany","usa","france","uk","canada","japan");*/
         this.allowedStringsInClassifierNode=allowedStringsInClassifierNode;
         articlesWithAllowedStringsInClassifierNode = findArticlesWithAllowedStringsInClassifierNode();
         if(generateStopList)
         {
             stopList =generateStopList(articlesWithAllowedStringsInClassifierNode,3.1);
-            //zapis do pliku
+
+                save(stopListPath,stopList);
+
         }else
         {
-            //wczytanie z pliku
+            stopList = new ArrayList<>();
+
+            stopList = load(stopListPath);
         }
+
         setTrainingAndTestSets(articlesWithAllowedStringsInClassifierNode);
+
         if(generateKeyWords)
         {
             keyWords = generateKeyWords(trainingSet, this.allowedStringsInClassifierNode);
-            //zapis do pliku
+
+
+            save(keyWordsPath, getListOfKeyWords());
         }else
         {
-            //wczytanie z pliku
+            List<String> allKeyWords = new  ArrayList<>();
+
+            allKeyWords = load(keyWordsPath);
+
+            keyWords = new HashMap<>();
+
+            keyWords.put("All", allKeyWords);
         }
     }
 
@@ -77,17 +97,23 @@ public final class DATA
 
     }
 
-    public  HashMap<String, ArrayList<String>> generateKeyWords(ArrayList<Article> articles, List<String> allowedStrings)
+    public  HashMap<String, List<String>> generateKeyWords(ArrayList<Article> articles, List<String> allowedStrings)
     {
         //      miejce, lista slow kluczowych dla tego miejsca
-        HashMap<String, ArrayList<String>> keyWords = new HashMap<>();
+        HashMap<String, List<String>> keyWords = new HashMap<>();
 
         //      slowo , liczba jego wystapien                          dowolny zbior articles
         HashMap<String, Integer> occurrenceOfWords = countOccurrenceOfWords(articles);
 
-        for(String place : allowedStrings)
+        for(String allowedString : allowedStrings)
         {
-            ArrayList<Article> articlesWithSpecificPlace = articles.stream().filter(article -> article.getPlaces().equals(place)).collect(Collectors.toCollection(ArrayList::new));
+            ArrayList<Article> articlesWithSpecificPlace;
+            if(NAME_OF_THE_NODE_WHICH_WILL_BE_CLASSIFIER.equals(PLACES_NODE))
+            articlesWithSpecificPlace = articles.stream().filter(article -> article.getPlaces().equals(allowedString)).collect(Collectors.toCollection(ArrayList::new));
+            else if(NAME_OF_THE_NODE_WHICH_WILL_BE_CLASSIFIER.equals(TOPICS_NODE))
+                articlesWithSpecificPlace = articles.stream().filter(article -> article.getTopic().equals(allowedString)).collect(Collectors.toCollection(ArrayList::new));
+            else articlesWithSpecificPlace = new ArrayList<>();
+
             HashMap<String, Integer> occurrenceOfWordsInSpecificPlace = countOccurrenceOfWords(articlesWithSpecificPlace);
             HashMap<String, Integer> keys =  new HashMap<>();
             for (Map.Entry<String, Integer> entry : occurrenceOfWords.entrySet())
@@ -112,7 +138,7 @@ public final class DATA
                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
             //do mapy slow kluczowych wkladanie jest miejsce do ktorego odnosza sie slowa kluczowe i slowa kluczowe
-            keyWords.put(place, new ArrayList<>(sortedByCount.keySet()));
+            keyWords.put(allowedString, new ArrayList<>(sortedByCount.keySet()));
         }
 
         return keyWords;
@@ -139,7 +165,15 @@ public final class DATA
     }
 
 
+    public List<String> getListOfKeyWords()
+    {
+        List<String> onlyKeyWords = new ArrayList<>();
 
+        for(List<String> list : keyWords.values())
+            onlyKeyWords.addAll(list);
+
+        return  onlyKeyWords;
+    }
     public ArrayList<Article> prepareArticles(ArrayList<Article> articles)
     {
         ArrayList<Article> helper = removeStopListWordsFromArticles(articles);
@@ -170,13 +204,27 @@ public final class DATA
     private  List<REUTERS> deleteIncompliteData(List<REUTERS> reuters)
     {
         List<REUTERS> helper = new ArrayList<>();
-        for(REUTERS r : reuters)
+        if(NAME_OF_THE_NODE_WHICH_WILL_BE_CLASSIFIER.equals(PLACES_NODE))
         {
-
-
-            if(!(r.getBODY() == null) && !(r.getPLACES() == null || r.getPLACES().equals("x")))
+            for(REUTERS r : reuters)
             {
-                helper.add(r);
+
+
+                if(!(r.getBODY() == null) && !(r.getPLACES() == null || r.getPLACES().equals("x")))
+                {
+                    helper.add(r);
+                }
+            }
+        }else if(NAME_OF_THE_NODE_WHICH_WILL_BE_CLASSIFIER.equals(TOPICS_NODE))
+        {
+            for(REUTERS r : reuters)
+            {
+
+
+                if(!(r.getBODY() == null) && !(r.getTOPICS() == null || r.getTOPICS().equals("x")))
+                {
+                    helper.add(r);
+                }
             }
         }
         return helper;
@@ -280,7 +328,7 @@ public final class DATA
 
    }
 
-    private   ArrayList<String> removeWordsContainedInStopList(ArrayList<String> body, ArrayList<String> stopList)
+    private   ArrayList<String> removeWordsContainedInStopList(ArrayList<String> body, List<String> stopList)
     {
         return body
                 .stream().parallel()
@@ -288,7 +336,7 @@ public final class DATA
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private   ArrayList<String> generateStopList(List<Article> articles, Double occurancePercentage){
+    private   List<String> generateStopList(List<Article> articles, Double occurancePercentage){
 
         ArrayList<String> result = new ArrayList<>();
 
@@ -301,6 +349,33 @@ public final class DATA
             }
         }
         return result;
+    }
+
+    public void save(String fileName, List<String> list)
+    {
+        try{
+
+        PrintWriter pw = new PrintWriter(new FileOutputStream(fileName));
+        for (String string : list)
+            pw.println(string);
+        pw.close();
+    } catch (FileNotFoundException e)
+    {
+        e.printStackTrace();
+    }
+    }
+
+    public List<String> load(String fileName)
+    {
+        try (BufferedReader br = Files.newBufferedReader(Paths.get(fileName))) {
+
+            //br returns as stream and convert it into a List
+            return br.lines().collect(Collectors.toList());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -324,12 +399,12 @@ public final class DATA
         return testSet;
     }
 
-    public HashMap<String, ArrayList<String>> getKeyWords()
+    public HashMap<String, List<String>> getKeyWords()
     {
         return keyWords;
     }
 
-    public ArrayList<String> getStopList()
+    public List<String> getStopList()
     {
         return stopList;
     }

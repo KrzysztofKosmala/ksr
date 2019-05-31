@@ -26,7 +26,7 @@ public class Manager
     public void setupData(int percentOfTrainingSet, String nameOfTheNode, List<String> allowedStrings, boolean generateKeyWords, boolean generateStopList, List<Integer> listOfIndexOfExtractorsToRun)
     {
         DATA tempCalculations = new DATA(percentOfTrainingSet, nameOfTheNode, allowedStrings, generateKeyWords, generateStopList);
-        dataApi = new DATA_API(tempCalculations.getTrainingSet(),tempCalculations.getTestSet(),tempCalculations.getStopList(),tempCalculations.getKeyWords());
+        dataApi = new DATA_API(tempCalculations.getTrainingSet(),tempCalculations.getTestSet(),tempCalculations.getStopList(),tempCalculations.getListOfKeyWords());
         nameOfTheNodeWhichWillBeClassifier=nameOfTheNode;
         allowedStringsInClassifierNode=allowedStrings;
         extractor = new Extractor(listOfIndexOfExtractorsToRun, dataApi);

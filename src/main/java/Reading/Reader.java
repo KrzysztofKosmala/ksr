@@ -56,17 +56,20 @@ import java.io.File;
 
 
 public class Reader {
-
+    private static boolean isTest = true;
     private DOCUMENT document;
-
+    private static String actualPath = "reuters.xml";
+    private static String testPath = "reutersTest.xml";
     public Reader() {}
     public static DOCUMENT read() throws JAXBException
     {
         JAXBContext ctx = JAXBContext.newInstance(DOCUMENT.class);
         Unmarshaller unmarshaller = ctx.createUnmarshaller();
-
-        DOCUMENT document = (DOCUMENT) unmarshaller.unmarshal(new File("reuters.xml"));
-
+        DOCUMENT document;
+        if (isTest)
+        document = (DOCUMENT) unmarshaller.unmarshal(new File(testPath));
+        else
+             document = (DOCUMENT) unmarshaller.unmarshal(new File(actualPath));
 
         return document;
     }

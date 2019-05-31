@@ -11,9 +11,9 @@ public final class DATA_API
 {
     List<Article> trainingSet;
     List<Article> testSet;
-    ArrayList<String> stopList;
-    HashMap<String, ArrayList<String>> keyWords;
-    public DATA_API(List<Article> trainingSet, List<Article> testSet, ArrayList<String> stopList, HashMap<String, ArrayList<String>> keyWords)
+    List<String> stopList;
+    List<String> keyWords;
+    public DATA_API(List<Article> trainingSet, List<Article> testSet, List<String> stopList, List<String> keyWords)
     {
         this.trainingSet=trainingSet;
         this.testSet=testSet;
@@ -21,7 +21,7 @@ public final class DATA_API
         this.keyWords=keyWords;
     }
 
-    public  HashMap<String, ArrayList<String>> getKeyWords()
+    public  List<String> getKeyWords()
     {
             return keyWords;
     }
@@ -36,7 +36,7 @@ public final class DATA_API
         return testSet;
     }
 
-    public  ArrayList<String> getStopList()
+    public  List<String> getStopList()
     {
         return stopList;
     }

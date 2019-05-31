@@ -32,7 +32,6 @@ public class Extractor
     public Extractor(List<Integer> listOfIndexOfExtractorsToRun, DATA_API data_api)
     {
         calculationsForExtractors= new CalculationsForExtractors(data_api);
-        allExtractors.add(new OccurrenceOfKeyWords());
         this.data_api = data_api;
         this.listOfIndexOfExtractorsToRun = listOfIndexOfExtractorsToRun;
         allExtractors.addAll(Arrays.asList(new OccurrenceOfKeyWords(), new AmountOfWords(), new FirstKeyWord()));

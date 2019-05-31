@@ -41,5 +41,22 @@
             <artifactId>org-apache-commons-logging</artifactId>
             <version>RELEASE110</version>
         </dependency>
+        <dependency>
+            <groupId>org.robolectric</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.3.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>

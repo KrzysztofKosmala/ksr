@@ -6,6 +6,7 @@ import Extractors.Helpers.CalculationsForExtractors;
 import DataLayer.Helpers.DoubleOrString;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FirstKeyWord implements IExtractors
 {
@@ -18,11 +19,9 @@ public class FirstKeyWord implements IExtractors
         boolean helper = true;
         for(String word : article.getBody())
         {
-            if(helper)
-                for (ArrayList<String> allKeyWords : calculationsForExtractors.getKeyWords().values())
-                {
+
                     if(helper)
-                        for (String keyWord : allKeyWords)
+                        for(String keyWord : calculationsForExtractors.getKeyWords())
                         {
                             if(calculationsForExtractors.calculateJaccardSimilarity(word, keyWord)>0.8)
                             {
@@ -32,7 +31,7 @@ public class FirstKeyWord implements IExtractors
                                 break;
                             }
                         }
-                }
+
         }
         if(helper)article.addAttribute(new DoubleOrString(""));
     }
