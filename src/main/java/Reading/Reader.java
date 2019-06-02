@@ -56,7 +56,7 @@ import java.io.File;
 
 
 public class Reader {
-    private static boolean isTest = true;
+    private static boolean isTest = false;
     private DOCUMENT document;
     private static String actualPath = "reuters.xml";
     private static String testPath = "reutersTest.xml";

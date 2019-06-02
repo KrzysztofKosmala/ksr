@@ -1,6 +1,5 @@
 package Extractors.Helpers;
 
-import DataLayer.Article;
 import DAO.DATA_API;
 
 import java.util.*;
@@ -14,7 +13,7 @@ public class CalculationsForExtractors
         this.dataApi = data_api;
     }
 
-    public  Double calculateJaccardSimilarity(CharSequence left, CharSequence right) {
+    Double calculateJaccardSimilarity(CharSequence left, CharSequence right) {
         Set<String> intersectionSet = new HashSet<>();
         Set<String> unionSet = new HashSet<>();
         boolean unionFilled = false;
@@ -38,27 +37,46 @@ public class CalculationsForExtractors
         }
         return (double) intersectionSet.size() / (double) unionSet.size();
     }
-    public  int countKeyWordsInArticle(Article article)
+    public int countKeyWordsInBody(ArrayList<String> body)
     {
         int occurrenceOfKeyWordsInArticle = 0;
 
-        for(String word : article.getBody())
+        for(String word : body)
         {
             for(String keyWord : dataApi.getKeyWords())
             {
-
                     if(calculateJaccardSimilarity(word,keyWord)>=0.8)
                     {
                         occurrenceOfKeyWordsInArticle++;
                     }
-
             }
         }
         return occurrenceOfKeyWordsInArticle;
     }
 
-    public List<String> getKeyWords()
+    public String findFirstKeyWord(ArrayList<String> body)
     {
-        return dataApi.getKeyWords();
+        for(String word : body)
+        {
+                for(String keyWord : dataApi.getKeyWords())
+                {
+                    if(calculateJaccardSimilarity(word, keyWord)>0.8)
+                    {
+
+                        return keyWord;
+
+                    }
+                }
+        }
+        return "";
+
     }
+
+    public double countFrequencyOfKeyWords(ArrayList<String> body)
+    {
+        return countKeyWordsInBody(body)/body.size();
+    }
+
+
+
 }

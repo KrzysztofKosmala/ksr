@@ -10,29 +10,9 @@ import java.util.List;
 
 public class FirstKeyWord implements IExtractors
 {
-
-
-
     @Override
     public void extract(Article article, CalculationsForExtractors calculationsForExtractors)
     {
-        boolean helper = true;
-        for(String word : article.getBody())
-        {
-
-                    if(helper)
-                        for(String keyWord : calculationsForExtractors.getKeyWords())
-                        {
-                            if(calculationsForExtractors.calculateJaccardSimilarity(word, keyWord)>0.8)
-                            {
-                                article.addAttribute(new DoubleOrString(keyWord));
-
-                                helper = false;
-                                break;
-                            }
-                        }
-
-        }
-        if(helper)article.addAttribute(new DoubleOrString(""));
+       article.addAttribute( new DoubleOrString(calculationsForExtractors.findFirstKeyWord(article)) );
     }
 }

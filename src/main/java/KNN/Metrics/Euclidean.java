@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Euclidean implements IMetric
 {
-    IDistanceBetweenStrings wayToCountDistanceBetweenStrings;
+    private IDistanceBetweenStrings wayToCountDistanceBetweenStrings;
 
     public Euclidean(IDistanceBetweenStrings howToCountDistanceBetweenStringsIfOccurs)
     {

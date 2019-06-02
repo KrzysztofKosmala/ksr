@@ -18,6 +18,7 @@ public final class DATA
     private final String NAME_OF_THE_NODE_WHICH_WILL_BE_CLASSIFIER;
     private final String PLACES_NODE = "PLACES";
     private final String TOPICS_NODE = "TOPICS";
+    private final int AMOUNT_OF_KEY_WORDS;//rowno dla kazdego tagu
     private final String stopListPath = "StopList.txt";
     private final String keyWordsPath = "KeyWords.txt";
 
@@ -33,34 +34,35 @@ public final class DATA
 
 
 
-    public DATA(int percentOfTrainingSet, String nameOfTheNodeWhichWillBeClassifier, List<String> allowedStringsInClassifierNode, boolean generateKeyWords, boolean generateStopList)
+    public DATA(int percentOfTrainingSet, String nameOfTheNodeWhichWillBeClassifier, List<String> allowedStringsInClassifierNode, boolean generateKeyWords, boolean generateStopList, int amountOfKeyWords)
     {
         this.PERCENT_OF_TRAINING_SET = percentOfTrainingSet;
         this.PERCENT_OF_OCCURRENCE_OF_WORD_IN_ONE_TAG_NEEDED_TO_RECOGNIZE_THIS_WORD_AS_KEYWORD =90;
-        NAME_OF_THE_NODE_WHICH_WILL_BE_CLASSIFIER=nameOfTheNodeWhichWillBeClassifier;
-        allReuters = setAllReuters();
-        allArticles = reutersToArticles(allReuters);
+        this.AMOUNT_OF_KEY_WORDS=amountOfKeyWords;
+        this.NAME_OF_THE_NODE_WHICH_WILL_BE_CLASSIFIER=nameOfTheNodeWhichWillBeClassifier;
+        this.allReuters = setAllReuters();
+        this.allArticles = reutersToArticles(allReuters);
         //w XML-u tag PLACES ma wygladac DOKLADNIE tak samo jak element listy allowedStringsInClassifierNode inaczej nie bedzie on wczytywany do pamieci
         this.allowedStringsInClassifierNode=allowedStringsInClassifierNode;
-        articlesWithAllowedStringsInClassifierNode = findArticlesWithAllowedStringsInClassifierNode();
+        this.articlesWithAllowedStringsInClassifierNode = findArticlesWithAllowedStringsInClassifierNode();
         if(generateStopList)
         {
-            stopList =generateStopList(articlesWithAllowedStringsInClassifierNode,3.1);
+            this.stopList =generateStopList(articlesWithAllowedStringsInClassifierNode,3.1);
 
                 save(stopListPath,stopList);
 
         }else
         {
-            stopList = new ArrayList<>();
+            this.stopList = new ArrayList<>();
 
-            stopList = load(stopListPath);
+            this.stopList = load(stopListPath);
         }
 
         setTrainingAndTestSets(articlesWithAllowedStringsInClassifierNode);
 
         if(generateKeyWords)
         {
-            keyWords = generateKeyWords(trainingSet, this.allowedStringsInClassifierNode);
+            this.keyWords = generateKeyWords(trainingSet, this.allowedStringsInClassifierNode);
 
 
             save(keyWordsPath, getListOfKeyWords());
@@ -70,9 +72,9 @@ public final class DATA
 
             allKeyWords = load(keyWordsPath);
 
-            keyWords = new HashMap<>();
+            this.keyWords = new HashMap<>();
 
-            keyWords.put("All", allKeyWords);
+            this.keyWords.put("All", allKeyWords);
         }
     }
 
@@ -134,7 +136,7 @@ public final class DATA
             Map<String, Integer> sortedByCount = keys.entrySet()
                     .stream()
                     .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                    .limit(10)//zadeklarowac globalnie
+                    .limit(AMOUNT_OF_KEY_WORDS/allowedStringsInClassifierNode.size())
                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
             //do mapy slow kluczowych wkladanie jest miejsce do ktorego odnosza sie slowa kluczowe i slowa kluczowe
