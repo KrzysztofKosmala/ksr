@@ -74,7 +74,11 @@ public class CalculationsForExtractors
 
     public double countFrequencyOfKeyWords(ArrayList<String> body)
     {
-        return countKeyWordsInBody(body)/body.size();
+        int keyWordsInBody =countKeyWordsInBody(body);
+        if(keyWordsInBody==0)
+            return 0.0;
+        else
+        return (double)keyWordsInBody/body.size();
     }
 
 

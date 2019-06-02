@@ -13,6 +13,6 @@ public class FirstKeyWord implements IExtractors
     @Override
     public void extract(Article article, CalculationsForExtractors calculationsForExtractors)
     {
-       article.addAttribute( new DoubleOrString(calculationsForExtractors.findFirstKeyWord(article)) );
+       article.addAttribute( new DoubleOrString(calculationsForExtractors.findFirstKeyWord(article.getBody())) );
     }
 }

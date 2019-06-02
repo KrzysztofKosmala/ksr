@@ -17,18 +17,18 @@ public class City implements IMetric
     @Override
     public double countDistance(List<DoubleOrString> attributesLeft, List<DoubleOrString> attributesRight)
     {
-        double r=0;
+        double distance=0;
         for(int i = 0; i<attributesLeft.size(); i++)
         {
             if(attributesLeft.get(i).isDoubleValue())
             {
-                r += Math.abs(attributesLeft.get(i).getDouble() - attributesRight.get(i).getDouble());
+                distance += Math.abs(attributesLeft.get(i).getDouble() - attributesRight.get(i).getDouble());
             }else if(attributesLeft.get(i).isStringValue())
             {
-                r += Math.abs(1 - wayToCountDistanceBetweenStrings.countDistance(attributesLeft.get(i).getString(), attributesRight.get(i).getString()));
+                distance += Math.abs(1 - wayToCountDistanceBetweenStrings.countDistance(attributesLeft.get(i).getString(), attributesRight.get(i).getString()));
             }
         }
-        return r;
+        return distance;
 
     }
 }

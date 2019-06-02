@@ -16,17 +16,17 @@ public class Euclidean implements IMetric
 
     public double countDistance(List<DoubleOrString> attributesLeft, List<DoubleOrString> attributesRight)
     {
-        double r=0;
+        double distance=0;
         for(int i = 0; i<attributesLeft.size(); i++)
         {
                 if(attributesLeft.get(i).isDoubleValue())
                 {
-                    r += Math.pow(attributesLeft.get(i).getDouble() - attributesRight.get(i).getDouble(), 2);
+                    distance += Math.pow(attributesLeft.get(i).getDouble() - attributesRight.get(i).getDouble(), 2);
                 }else if(attributesLeft.get(i).isStringValue())
                 {
-                    r += Math.pow( 1 - wayToCountDistanceBetweenStrings.countDistance(attributesLeft.get(i).getString(), attributesRight.get(i).getString()), 2);
+                    distance += Math.pow( 1 - wayToCountDistanceBetweenStrings.countDistance(attributesLeft.get(i).getString(), attributesRight.get(i).getString()), 2);
                 }
         }
-        return Math.sqrt(r);
+        return Math.sqrt(distance);
     }
 }
