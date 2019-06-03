@@ -72,17 +72,38 @@ public class KNN
 
     public void run()
     {
+        HashMap<String, Integer> mapOfTruth = new HashMap<>();
+        HashMap<String, Integer> mapOfAll = new HashMap<>();
+
         if(nameOfTheNode.equals("PLACES"))
         {
 
-            int i=0;
+
             for(Article article : testSet)
             {
 
+                if(!mapOfTruth.containsKey(article.getPlaces()))
+                {
+                    mapOfTruth.put(article.getPlaces(),0);
+                    mapOfAll.put(article.getPlaces(),0);
+                }
+                mapOfAll.replace(article.getPlaces(),mapOfTruth.get(article.getPlaces())+1);
                 if(predict(article).equals(article.getPlaces()))
-                    i++;
+                    mapOfTruth.replace(article.getPlaces(),mapOfTruth.get(article.getPlaces())+1);
 
-            }System.out.println("Poprawynych rozpoznan: "+ ((i*100)/testSet.size()) +"%");
+
+
+            }
+            Iterator it = mapOfAll.entrySet().iterator();
+            Iterator it2 = mapOfTruth.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry pair = (Map.Entry)it.next();
+                Map.Entry pair2 = (Map.Entry)it2.next();
+                System.out.println(pair.getKey() + " = " + ((int)pair2.getValue()*100)/(int)pair.getValue()+"%");
+                it.remove(); // avoids a ConcurrentModificationException
+            }
+
+
 
         }else if(nameOfTheNode.equals("TOPICS"))
         {

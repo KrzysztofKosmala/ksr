@@ -34,7 +34,7 @@ public class Extractor
         calculationsForExtractors= new CalculationsForExtractors(data_api);
         this.data_api = data_api;
         this.listOfIndexOfExtractorsToRun = listOfIndexOfExtractorsToRun;
-        allExtractors.addAll(Arrays.asList(new OccurrenceOfKeyWords(), new AmountOfWords(), new FirstKeyWord(), new FrequencyOfKeyWords()));
+        allExtractors.addAll(Arrays.asList(new OccurrenceOfKeyWords(), new AmountOfWords(), new FirstKeyWord(), new FrequencyOfKeyWords(), new AllKeyWords()));
     }
 
     //OPCJE

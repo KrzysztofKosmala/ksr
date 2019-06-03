@@ -82,5 +82,25 @@ public class CalculationsForExtractors
     }
 
 
+    public String getAllKeyWordsWhichOccursInPassedBody(ArrayList<String> body)
+    {
+        StringBuilder keyWordsInBody = new StringBuilder().append("");
+
+        for(String word : body)
+        {
+            for(String keyWord : dataApi.getKeyWords())
+            {
+                if(calculateJaccardSimilarity(word, keyWord)>0.8)
+                {
+
+                    keyWordsInBody.append(keyWord);
+
+                }
+            }
+        }
+
+        return keyWordsInBody.toString();
+    }
+
 
 }

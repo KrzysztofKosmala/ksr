@@ -18,10 +18,11 @@ public class Main
         extractorsToRun.add(1);
         extractorsToRun.add(2);
         extractorsToRun.add(3);
-        m.setupData(60, "PLACES", Arrays.asList("west-germany","usa","france","uk","canada","japan"), false, false, extractorsToRun,40);
+        extractorsToRun.add(4);
+        m.setupData(60, "PLACES", Arrays.asList("west-germany", "usa", "france","uk","canada","japan"), false, false, extractorsToRun,40);
         m.extractAttributes();
         m.normalizeAttributes();
-        m.setupKNN(4, new Euclidean(new NGram(4)));
+        m.setupKNN(5, new Euclidean(new NGram(3)));
         m.runKNN();
     }
 }
