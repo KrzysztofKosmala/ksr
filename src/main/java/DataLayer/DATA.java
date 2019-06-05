@@ -21,11 +21,14 @@ public final class DATA
     private final int AMOUNT_OF_KEY_WORDS;//rowno dla kazdego tagu
     private final String stopListPath = "StopList.txt";
     private final String keyWordsPath = "KeyWords.txt";
+    private final String stringsInClassifierNodePath = "StringsInClassifierNode.txt";
 
     private List<REUTERS> allReuters;
+
     private ArrayList<Article> allArticles;
     private ArrayList<Article> trainingSet;
     private ArrayList<Article> testSet;
+
     private HashMap<String, List<String>> keyWords;
     private List<String> stopList;
     private List<String> allowedStringsInClassifierNode;
@@ -45,11 +48,13 @@ public final class DATA
         //w XML-u tag PLACES ma wygladac DOKLADNIE tak samo jak element listy allowedStringsInClassifierNode inaczej nie bedzie on wczytywany do pamieci
         this.allowedStringsInClassifierNode=allowedStringsInClassifierNode;
         this.articlesWithAllowedStringsInClassifierNode = findArticlesWithAllowedStringsInClassifierNode();
+
         if(generateStopList)
         {
             this.stopList =generateStopList(articlesWithAllowedStringsInClassifierNode,3.1);
 
                 save(stopListPath,stopList);
+
 
         }else
         {
@@ -256,11 +261,12 @@ public final class DATA
     private  ArrayList<Article> findArticlesWithAllowedStringsInClassifierNode()
     {
         ArrayList<Article> allowedArticles = new ArrayList<>();
-
+        allowedStringsInClassifierNode = new ArrayList<>();
         if(NAME_OF_THE_NODE_WHICH_WILL_BE_CLASSIFIER.equals(PLACES_NODE))
         {
             for (Article article : allArticles)
             {
+
                 if (isGoodPlace(article))
                 {
                     allowedArticles.add(article);
@@ -270,6 +276,7 @@ public final class DATA
         {
             for (Article article : allArticles)
             {
+
                 if (isGoodTopic(article))
                 {
                     allowedArticles.add(article);
@@ -420,6 +427,8 @@ public final class DATA
     {
         return articlesWithAllowedStringsInClassifierNode;
     }
+
+
 
     public String getNAME_OF_THE_NODE_WHICH_WILL_BE_CLASSIFIER()
     {

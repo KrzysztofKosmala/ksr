@@ -29,8 +29,14 @@ public class Manager
         dataApi = new DATA_API(tempCalculations.getTrainingSet(),tempCalculations.getTestSet(),tempCalculations.getStopList(),tempCalculations.getListOfKeyWords());
         nameOfTheNodeWhichWillBeClassifier=nameOfTheNode;
         allowedStringsInClassifierNode=allowedStrings;
+
         extractor = new Extractor(listOfIndexOfExtractorsToRun, dataApi);
 
+    }
+
+    public DATA_API getDataApi()
+    {
+        return dataApi;
     }
 
     public void extractAttributes()
