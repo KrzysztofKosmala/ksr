@@ -1,6 +1,5 @@
 package GUI;
 
-import KNN.Metrics.Euclidean;
 import KNN.Metrics.IMetric;
 
 import javax.swing.*;
@@ -14,19 +13,21 @@ public class App extends JFrame  {
     private JComboBox meticBox;
     private JComboBox stringComparingBox;
     private JComboBox nodeBox;
-    private JCheckBox ex1CheckBox;
-    private JCheckBox ex2CheckBox;
-    private JCheckBox ex3CheckBox;
-    private JCheckBox ex4CheckBox;
-    private JCheckBox ex5CheckBox;
-    private JButton uruchomButton;
-    private JButton wybierzButton;
-    private JCheckBox genrujSłowaKluczoweCheckBox;
-    private JCheckBox generujStopListęCheckBox;
+    private JCheckBox occurrenceOfKeyWordsCheckBox;
+    private JCheckBox amountOfWordsCheckBox;
+    private JCheckBox firstKeyWordCheckBox;
+    private JCheckBox FrequencyOfKeyWordsCheckBox;
+    private JCheckBox allKeyWordsCheckBox;
+    private JButton runButton;
+    private JButton selectButton;
+    private JCheckBox generateKeyWordsCheckBox;
+    private JCheckBox generateStopListCheckBox;
     private JSlider amountOfKeyWordsSlider;
     private JLabel sliderValues;
     private JTextField textField1;
-    private DefaultComboBoxModel<String> listModel;
+    private DefaultComboBoxModel<String> listOfMetrics;
+    private DefaultComboBoxModel<String> listOfStringComparingOptions;
+    private DefaultComboBoxModel<String> listOfNodes;
 
 
     public App()  {
@@ -35,28 +36,40 @@ public class App extends JFrame  {
         setTitle("KSR");
         setSize(930,700);
         add(panel);
-        listModel = new DefaultComboBoxModel<String>();
-        listModel.addElement("Euclidean");
-        listModel.addElement("City");
-        listModel.addElement("Chebyshev");
+        listOfMetrics = new DefaultComboBoxModel<String>();
+        listOfMetrics.addElement("Euclidean");
+        listOfMetrics.addElement("City");
+        listOfMetrics.addElement("Chebyshev");
 
-        meticBox.setModel(listModel);
+        meticBox.setModel(listOfMetrics);
 
 
+        listOfStringComparingOptions = new DefaultComboBoxModel<String>();
+        listOfStringComparingOptions.addElement("NGram");
+        listOfStringComparingOptions.addElement("Niewiadomski");
 
-        if(generujStopListęCheckBox.isSelected())
+        stringComparingBox.setModel(listOfStringComparingOptions);
+
+
+        listOfNodes = new DefaultComboBoxModel<String>();
+        listOfNodes.addElement("PLACES");
+        listOfNodes.addElement("TOPIC");
+
+        nodeBox.setModel(listOfNodes);
+
+        if(generateStopListCheckBox.isSelected())
         {
 
         }
 
 
-        uruchomButton.addActionListener(new ActionListener() {
+        runButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
             }
         });
-        wybierzButton.addActionListener(new ActionListener() {
+        selectButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ChoiceAllowedStringsInNode choice = new ChoiceAllowedStringsInNode();
@@ -66,10 +79,10 @@ public class App extends JFrame  {
         });
 
 
-        genrujSłowaKluczoweCheckBox.addActionListener(new ActionListener() {
+        generateKeyWordsCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(genrujSłowaKluczoweCheckBox.isSelected())
+                if(generateKeyWordsCheckBox.isSelected())
                 {
                     amountOfKeyWordsSlider.setEnabled(true);
 
