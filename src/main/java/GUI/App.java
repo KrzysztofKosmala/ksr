@@ -47,7 +47,7 @@ public class App extends JFrame  {
     private DefaultComboBoxModel<String> listOfStringComparingOptions;
     private DefaultComboBoxModel<String> listOfNodes;
 
-
+    private List<String> strings;
     public App()  {
 
 
@@ -71,24 +71,22 @@ public class App extends JFrame  {
 
         listOfNodes = new DefaultComboBoxModel<String>();
         listOfNodes.addElement("PLACES");
-        listOfNodes.addElement("TOPIC");
+        listOfNodes.addElement("TOPICS");
 
         nodeBox.setModel(listOfNodes);
 
-        if(generateStopListCheckBox.isSelected())
-        {
 
-        }
 
 
         runButton.addActionListener(e -> new Thread(() ->
         {
             Manager m = new Manager();
-            m.setupData(percentSlider.getValue(), getNodeChoice(), Arrays.asList("west-germany", "usa", "france","uk","canada","japan"), generateKeyWordsCheckBox.isSelected(), generateStopListCheckBox.isSelected(), getExtractorsToRun(), amountOfKeyWordsSlider.getValue());
+            m.setupData(percentSlider.getValue(), getNodeChoice(), strings, generateKeyWordsCheckBox.isSelected(), generateStopListCheckBox.isSelected(), getExtractorsToRun(), amountOfKeyWordsSlider.getValue());
             m.extractAttributes();
             m.normalizeAttributes();
             m.setupKNN(knnSlider.getValue(), getMetricChoice());
             m.runKNN();
+            Result result = new Result();
         }).start());
 
         selectButton.addActionListener(new ActionListener() {
@@ -96,6 +94,7 @@ public class App extends JFrame  {
             public void actionPerformed(ActionEvent e) {
                 ChoiceAllowedStringsInNode choice = new ChoiceAllowedStringsInNode(nodeBox.getSelectedIndex());
                 choice.setVisible(true);
+                setList(choice.getChoosenList());
 
             }
         });
@@ -183,7 +182,7 @@ public class App extends JFrame  {
         if(nodeBox.getSelectedIndex()==0)
             return "PLACES";
         else if(nodeBox.getSelectedIndex()==1)
-            return "TOPIC";
+            return "TOPICS";
         else
             return "PLACES";
     }
@@ -210,5 +209,8 @@ public class App extends JFrame  {
         // TODO: place custom component creation code here
     }
 
-
+    public void setList(List<String> listOfStrings)
+    {
+        strings=listOfStrings;
+    }
 }

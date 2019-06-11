@@ -261,7 +261,7 @@ public final class DATA
     private  ArrayList<Article> findArticlesWithAllowedStringsInClassifierNode()
     {
         ArrayList<Article> allowedArticles = new ArrayList<>();
-        allowedStringsInClassifierNode = new ArrayList<>();
+
         if(NAME_OF_THE_NODE_WHICH_WILL_BE_CLASSIFIER.equals(PLACES_NODE))
         {
             for (Article article : allArticles)

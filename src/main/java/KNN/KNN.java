@@ -87,9 +87,14 @@ public class KNN
                     mapOfTruth.put(article.getPlaces(),0);
                     mapOfAll.put(article.getPlaces(),0);
                 }
-                mapOfAll.replace(article.getPlaces(),mapOfTruth.get(article.getPlaces())+1);
+                int count = mapOfAll.get(article.getPlaces());
+                mapOfAll.put(article.getPlaces(),count+1);
+                count=0;
                 if(predict(article).equals(article.getPlaces()))
-                    mapOfTruth.replace(article.getPlaces(),mapOfTruth.get(article.getPlaces())+1);
+                {
+                    count=mapOfTruth.get(article.getPlaces());
+                    mapOfTruth.put(article.getPlaces(),count+1);
+                }
 
 
 
@@ -108,16 +113,38 @@ public class KNN
         }else if(nameOfTheNode.equals("TOPICS"))
         {
 
-            int i=0;
+
             for(Article article : testSet)
             {
 
+                if(!mapOfTruth.containsKey(article.getTopic()))
+                {
+                    mapOfTruth.put(article.getTopic(),0);
+                    mapOfAll.put(article.getTopic(),0);
+                }
+                int count = mapOfAll.get(article.getTopic());
+                mapOfAll.put(article.getTopic(),count+1);
+                count=0;
                 if(predict(article).equals(article.getTopic()))
-                    i++;
+                {
+                    count=mapOfTruth.get(article.getTopic());
+                    mapOfTruth.put(article.getTopic(),count+1);
+                }
 
-            }System.out.println("Poprawynych rozpoznan: "+ ((i*100)/testSet.size()) +"%");
 
-        }
+
+            }
+            Iterator it = mapOfAll.entrySet().iterator();
+            Iterator it2 = mapOfTruth.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry pair = (Map.Entry)it.next();
+                Map.Entry pair2 = (Map.Entry)it2.next();
+                System.out.println(pair.getKey() + " = " + ((int)pair2.getValue()*100)/(int)pair.getValue()+"%");
+                it.remove(); // avoids a ConcurrentModificationException
+            }
+            }
+
+
     }
 
     private String predict(Article articleToPredict)

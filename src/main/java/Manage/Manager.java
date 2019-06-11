@@ -48,7 +48,6 @@ public class Manager
     public void normalizeAttributes()
     {
         extractor.normalizeVectors();
-
     }
 
     public void setupKNN(int k, IMetric metric)
