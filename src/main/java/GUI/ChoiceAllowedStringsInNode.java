@@ -7,6 +7,8 @@ import javax.swing.*;
 import javax.xml.bind.JAXBException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ChoiceAllowedStringsInNode extends JFrame {
-    private JPanel panel;
+    private JPanel window;
     private JList list;
     private JButton zapiszButton;
 
@@ -26,9 +28,14 @@ public class ChoiceAllowedStringsInNode extends JFrame {
 
     public ChoiceAllowedStringsInNode(int node)
     {
+
         setTitle("Dostępne w tym korzeniu");
-        setSize(400,700);
-        add(panel);
+        setSize(800,1000);
+        //panel.add(list);
+        //panel.add(zapiszButton);
+        add(window);
+
+
 
         listModel = new DefaultListModel<String>();
         List<REUTERS> r = new ArrayList<>();
@@ -58,9 +65,22 @@ public class ChoiceAllowedStringsInNode extends JFrame {
 
         sp.setViewportView(list);
         add(sp);
+        list.setVisibleRowCount(20);
+        //add(list);
+        //add(zapiszButton);
+
         zapiszButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        list.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+                    list.setVisible(false);
+                }
 
             }
         });
