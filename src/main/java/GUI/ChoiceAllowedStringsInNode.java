@@ -20,7 +20,8 @@ public class ChoiceAllowedStringsInNode extends JFrame {
     private JPanel panel;
     private JList list;
     private JButton zapiszButton;
-    private JScrollBar scrollBar1;
+
+    private JScrollPane sp= new JScrollPane();
     private DefaultListModel<String> listModel;
 
     public ChoiceAllowedStringsInNode(int node)
@@ -28,7 +29,7 @@ public class ChoiceAllowedStringsInNode extends JFrame {
         setTitle("Dostępne w tym korzeniu");
         setSize(400,700);
         add(panel);
-        scrollBar1.setEnabled(true);
+
         listModel = new DefaultListModel<String>();
         List<REUTERS> r = new ArrayList<>();
         {
@@ -55,7 +56,8 @@ public class ChoiceAllowedStringsInNode extends JFrame {
 
         list.setModel(listModel);
 
-
+        sp.setViewportView(list);
+        add(sp);
         zapiszButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
