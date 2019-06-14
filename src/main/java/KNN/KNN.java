@@ -104,7 +104,8 @@ public class KNN
             while (it.hasNext()) {
                 Map.Entry pair = (Map.Entry)it.next();
                 Map.Entry pair2 = (Map.Entry)it2.next();
-                System.out.println(pair.getKey() + " = " + ((int)pair2.getValue()*100)/(int)pair.getValue()+"%");
+                System.out.println(pair.getKey() + " = " + ((int)pair.getValue()+ " wszytskich | "  + (int)pair2.getValue() + " przewidzianych " + "| " + ((int)pair2.getValue()*100)/(int)pair.getValue()+"%"));
+
                 it.remove(); // avoids a ConcurrentModificationException
             }
 
@@ -139,7 +140,8 @@ public class KNN
             while (it.hasNext()) {
                 Map.Entry pair = (Map.Entry)it.next();
                 Map.Entry pair2 = (Map.Entry)it2.next();
-                System.out.println(pair.getKey() + " = " + ((int)pair2.getValue()*100)/(int)pair.getValue()+"%");
+                System.out.println(pair.getKey() + " = " + ((int)pair.getValue()+ " wszytskich | "  + (int)pair2.getValue() + " przewidzianych " + "| " + ((int)pair2.getValue()*100)/(int)pair.getValue()+"%"));
+
                 it.remove(); // avoids a ConcurrentModificationException
             }
             }

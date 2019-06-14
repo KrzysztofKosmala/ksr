@@ -56,10 +56,10 @@ import java.io.File;
 
 
 public class Reader {
-    private static boolean isTest = false;
+    private static boolean isTest = true;
     private DOCUMENT document;
     private static String actualPath = "reuters.xml";
-    private static String testPath = "reutersTest.xml";
+    private static String testPath = "teksty3.xml";
     public Reader() {}
     public static DOCUMENT read() throws JAXBException
     {
